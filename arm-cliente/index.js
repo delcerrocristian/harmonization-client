@@ -77,3 +77,7 @@ function builUrl(name){
   });
   return url;
 }
+
+function resultados(){
+	
+}

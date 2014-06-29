@@ -1,0 +1,94 @@
+@import url(http://fonts.googleapis.com/css?family=Gudea:400,700,400italic);
+
+body {
+  font-family: 'Gudea', sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  background: #f0f0f0;
+}
+
+.boxes {
+	margin:auto;
+	width: 960px;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 0;
+}
+
+.animation {
+  -webkit-transition: all 0.3s ;
+  -moz-transition: all 0.3s ;
+  -ms-transition: all 0.3s ;
+  -o-transition: all 0.3s ;
+  transition: all 0.3s ;
+}
+
+.roundedCorners {
+  border-radius: 3px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  line-height: 1.2em;
+  font-weight: 700;
+  color: #01939A;
+}
+
+.wrapper {
+  width: 400px;
+  padding: 20px;
+  margin: 20px 20px 20px 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+}
+
+.uploadForm {
+  
+}
+
+.top {
+  margin: 20px 0;
+  line-height: 25px;
+}
+
+.labelFile {
+  display: inline-block;
+}
+
+.fileName {
+  display: inline-block;
+  width: 250px;
+  padding: 0 10px;
+  line-height: 25px;
+  border: solid 1px #e0e0e0;
+}
+
+.fileName:focus {
+  
+}
+
+.inputFileInvisible {
+  position: absolute;
+  top: -999999px;
+  left: -999999px;
+}
+
+.inputFile,
+.buttonSubmit {
+  display: inline-block;
+  padding: 0 10px;
+  text-transform: uppercase;
+  line-height: 30px;
+  color: #FFFFFF;
+  background: #01939A;
+  border: 0;
+  cursor: pointer;
+}
+
+.inputFile:hover,
+.buttonSubmit:hover {
+  background: #1D7073;
+}

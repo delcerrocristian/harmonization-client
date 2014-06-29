@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html lang="es">
+    <head>
+      <meta charset="utf-8" />
+       <title>arm-client</title>
+
+        <!-- CSS dependencies -->
+        <link rel="stylesheet" href="css/index.css">
+        <!-- jquery -->
+		<script src="libraries/jquery/jquery-2.1.0.min.js"></script>
+
+        <script src="index.js"></script> 
+    </head>
+
+    <body>
+    	<div class="boxes">
+	      	<div class="wrapper roundedCorners loadingcogs" style="float:left;">
+	            <h1 class="pageTitle">Extraer Procesos ISO</h1>
+	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
+	              <input class="inputFileInvisible" type="file" name="file" id="file">
+	              <div class="top">
+	                <label class="labelFile" for="file">Nombre:</label>
+	                <input class="fileName roundedCorners animation" type="text" placeholder="Estandar" name="nombre" id="nombre">
+	              </div>
+	              <div class="top">
+	                <label class="labelFile">Procesamiento:</label><br>
+	                <input type="radio" name="ejecucion" value="0"> Asistido<br>
+	                <input type="radio" name="ejecucion" value="1"> Sin asistir
+	              </div>
+	              <div class="top" style="padding-bottom: 16px">
+	                <label class="labelFile">Patrones:</label><br>
+	                <div id="patrones">
+	                  <input class="fileName roundedCorners animation pattern" type="text" placeholder="Patrón" name="patron_1" id="patron_1"><input class="buttonSubmit roundedCorners animation" type="button" name="btpatron_1" id="btpatron_1" value="Borrar" onclick="delPatron(1)">
+	                </div>
+	                <input class="buttonSubmit roundedCorners animation" type="button" name="btpatron" value="Añadir" onclick="addPatron()">
+	              </div>
+	              <button class="inputFile roundedCorners animation" type="button" onclick="chooseFile();">Seleccionar archivo</button>
+	              <input class="buttonSubmit roundedCorners animation" type="button" name="submit" value="Procesar" onclick="enviar()">
+	            </form>
+	        </div>
+	        <div class="wrapper roundedCorners loadingcogs" style="float:left;">
+	            <h1 class="pageTitle">Extraer Procesos CMMI</h1>
+	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
+	              <input class="inputFileInvisible" type="file" name="file" id="file">
+	              <div class="top">
+	                <label class="labelFile" for="file">Nombre:</label>
+	                <input class="fileName roundedCorners animation" type="text" placeholder="Estandar" name="nombre" id="nombre">
+	              </div>
+	              <button class="inputFile roundedCorners animation" type="button" onclick="chooseFile();">Seleccionar archivo</button>
+	              <input class="buttonSubmit roundedCorners animation" type="button" name="submit" value="Procesar" onclick="enviar()">
+	            </form>
+	        </div>
+	        <div class="wrapper roundedCorners loadingcogs" style="float:left;">
+	            <h1 class="pageTitle">Recuperar Información</h1>
+	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
+	              <div class="top">
+	                <label class="labelFile" for="file">Modelo/Estándar:</label>
+	                <select class="fileName roundedCorners animation">
+	                	<option value=""></option>
+	                	<option value="1">Prueba 1</option>
+	                	<option value="2">Prueba 2</option>
+	                </select>
+	                
+	              </div>
+	              <button class="inputFile roundedCorners animation" type="button" onclick="chooseFile();">Estadísticas</button>
+	              <button class="inputFile roundedCorners animation" type="button" onclick="chooseFile();">Resultados</button>
+	            </form>
+	        </div>
+        </div>
+    </body>
+</html>

@@ -5,6 +5,11 @@ body {
   font-size: 16px;
   line-height: 22px;
   background: #f0f0f0;
+  text-decoration: none;
+}
+
+body a{
+  text-decoration: none;
 }
 
 .boxes {

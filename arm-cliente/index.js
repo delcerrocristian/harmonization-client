@@ -61,7 +61,7 @@ $('.inputFileInvisible').bind('change paste keyup', function(){
 
 function addPatron(){
   cont_patron++;
-  $("#patrones").append('<input class="fileName roundedCorners animation pattern" type="text" placeholder="Patrón" name="patron_'+cont_patron+'" id="patron_'+cont_patron+'"><input class="buttonSubmit roundedCorners animation" type="button" name="btpatron_'+cont_patron+'" id="btpatron_'+cont_patron+'" value="Borrar" onclick="delPatron('+cont_patron+')">');
+  $("#patrones").append('<input class="fileName roundedCorners animation pattern" type="text" name="patron_'+cont_patron+'" id="patron_'+cont_patron+'"><input class="buttonSubmit roundedCorners animation" type="button" name="btpatron_'+cont_patron+'" id="btpatron_'+cont_patron+'" value="Borrar" onclick="delPatron('+cont_patron+')">');
 }
 
 function delPatron(index){
@@ -81,3 +81,17 @@ function builUrl(name){
 function resultados(){
 	
 }
+
+$(document).ready(function() { 
+	var url_array = $(location).attr('href').split('=');
+	
+	if(url_array.length == 2){
+		if(url_array[1] == 'en'){
+			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
+		}
+		
+		$(".inter2").each(function (){
+			$(this).html(lang[$(this).html()]);
+		});
+	}
+}); 

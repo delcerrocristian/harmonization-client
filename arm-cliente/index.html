@@ -17,27 +17,27 @@
     <body class="body">
     	<div class="boxes">
 	      	<div class="wrapper roundedCorners loadingcogs" style="float:left;">
-	            <h1 class="pageTitle inter2">Extraer Procesos ISO</h1>
+	            <h1 class="pageTitle inter">Extraer Procesos ISO</h1>
 	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
 	              <input class="inputFileInvisible" type="file" name="file" id="file">
 	              <div class="top">
-	                <label class="labelFile inter2" for="file">Nombre:</label>
+	                <label class="labelFile inter" for="file">Nombre:</label>
 	                <input class="fileName roundedCorners animation" type="text" name="nombre" id="nombre">
 	              </div>
 	              <div class="top">
 	                <label class="labelFile inter">Procesamiento:</label><br>
-	                <input class="inter" type="radio" name="ejecucion" value="0"> Asistido<br>
-	                <input class="inter" type="radio" name="ejecucion" value="1"> Sin asistir
+	                <input class="asistido" type="radio" name="ejecucion" value="0"><label class="inter">Asistido</label><br>
+	                <input class="no asistido" type="radio" name="ejecucion" value="1"><label class="inter">Sin asistir</label>
 	              </div>
 	              <div class="top" style="padding-bottom: 16px">
 	                <label class="labelFile inter">Patrones:</label><br>
 	                <div id="patrones">
-	                  <input class="fileName roundedCorners animation pattern inter" type="text" name="patron_1" id="patron_1"><input class="buttonSubmit roundedCorners animation" type="button" name="btpatron_1" id="btpatron_1" value="Borrar" onclick="delPatron(1)">
+	                  <input class="fileName roundedCorners animation pattern" type="text" name="patron_1" id="patron_1"><button class="inputFile roundedCorners animation inter" type="button" name="btpatron_1" id="btpatron_1" onclick="delPatron(1)">Borrar</button>
 	                </div>
-	                <input class="buttonSubmit roundedCorners animation" type="button" name="btpatron" value="Añadir" onclick="addPatron()">
+	                <button class="inputFile roundedCorners animation inter" type="button" name="btpatron" id="btpatron" onclick="addPatron()">Añadir</button>
 	              </div>
 	              <button class="inputFile roundedCorners animation inter" type="button" onclick="chooseFile();">Seleccionar archivo</button>
-	              <input class="buttonSubmit roundedCorners animation" type="button" name="submit" value="Procesar" onclick="enviar()">
+	              <button class="inputFile roundedCorners animation inter" type="button" onclick="enviar();">Procesar</button>
 	            </form>
 	        </div>
 	        <div class="wrapper roundedCorners loadingcogs" style="float:left;">
@@ -49,7 +49,7 @@
 	                <input class="fileName roundedCorners animation" type="text" name="nombre" id="nombre">
 	              </div>
 	              <button class="inputFile roundedCorners animation inter" type="button" onclick="chooseFile();">Seleccionar archivo</button>
-	              <input class="buttonSubmit roundedCorners animation" type="button" name="submit" value="Procesar" onclick="enviar()">
+	              <button class="inputFile roundedCorners animation inter" type="button" onclick="enviar();">Procesar</button>
 	            </form>
 	        </div>
 	        <div class="wrapper roundedCorners loadingcogs" style="float:left;">

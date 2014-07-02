@@ -1,6 +1,7 @@
 var urlApi = "http://192.168.1.12:8080/armonize/api";
 var sentences;
 var ejecucion;
+var lang_es = true;
 var cont_patron = 1;
 
 function chooseFile() {
@@ -61,7 +62,14 @@ $('.inputFileInvisible').bind('change paste keyup', function(){
 
 function addPatron(){
   cont_patron++;
-  $("#patrones").append('<input class="fileName roundedCorners animation pattern" type="text" name="patron_'+cont_patron+'" id="patron_'+cont_patron+'"><input class="buttonSubmit roundedCorners animation" type="button" name="btpatron_'+cont_patron+'" id="btpatron_'+cont_patron+'" value="Borrar" onclick="delPatron('+cont_patron+')">');
+  
+  var cadena_delete = "Borrar";
+  
+  if(lang_es == false) cadena_delete = lang[cadena_delete];
+    
+  var cadena_patron = '<input class="fileName roundedCorners animation pattern" type="text" name="patron_'+cont_patron+'" id="patron_'+cont_patron+'"><button class="inputFile roundedCorners animation inter" type="button" name="btpatron_'+cont_patron+'" id="btpatron_'+cont_patron+'" onclick="delPatron('+cont_patron+')">'+cadena_delete+'</button>'
+  
+  $("#patrones").append(cadena_patron);
 }
 
 function delPatron(index){
@@ -87,10 +95,11 @@ $(document).ready(function() {
 	
 	if(url_array.length == 2){
 		if(url_array[1] == 'en'){
+			lang_es = false;
 			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
 		}
 		
-		$(".inter2").each(function (){
+		$(".inter").each(function (){
 			$(this).html(lang[$(this).html()]);
 		});
 	}

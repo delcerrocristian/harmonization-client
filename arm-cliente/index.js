@@ -86,8 +86,8 @@ function builUrl(name){
   return url;
 }
 
-function resultados(){
-	
+function openIso(){
+	$.colorbox({href:"tabla_iso.html",width:'95%',height:'95%,',iframe: true});
 }
 
 $(document).ready(function() { 

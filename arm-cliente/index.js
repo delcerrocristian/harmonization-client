@@ -90,6 +90,10 @@ function openIso(){
 	$.colorbox({href:"tabla_iso.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
+function openCmmi(){
+	$.colorbox({href:"tabla_cmmi.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+}
+
 $(document).ready(function() { 
 	var url_array = $(location).attr('href').split('=');
 	

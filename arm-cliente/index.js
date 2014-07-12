@@ -2,6 +2,7 @@ var urlApi = "http://192.168.1.12:8080/armonize/api";
 var sentences;
 var ejecucion;
 var lang_es = true;
+var url_lang = "";
 var cont_patron = 1;
 
 function chooseFile() {
@@ -87,32 +88,37 @@ function builUrl(name){
 }
 
 function openIso(){
-	$.colorbox({href:"tabla_iso.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+	$.colorbox({href:"tabla_iso.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
 function openCmmi(){
-	$.colorbox({href:"tabla_cmmi.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+	$.colorbox({href:"tabla_cmmi.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
 function resultados(){
-	$.colorbox({href:"graficas.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
 function manual(){
-	$.colorbox({href:"graficas.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
-$(document).ready(function() { 
+$(document).ready(function() {
 	var url_array = $(location).attr('href').split('=');
 	
 	if(url_array.length == 2){
 		if(url_array[1] == 'en'){
 			lang_es = false;
+			url_lang = "?lang=en";
 			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
+		}else{
+			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
 		}
 		
 		$(".inter").each(function (){
 			$(this).html(lang[$(this).html()]);
 		});
+	}else{
+		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
 	}
 }); 

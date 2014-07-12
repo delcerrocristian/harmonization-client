@@ -213,6 +213,18 @@ function cargarProductos(){
 }
 
 $(document).ready(function() {
+	var url_array = $(location).attr('href').split('=');
+	
+	if(url_array.length == 2){
+		if(url_array[1] == 'en'){
+			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
+		}else{
+			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+		}
+	}else{
+		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+	}
+	
 	var height = $(window).height()-20;
 	$("#layout").css('height',height+"px");
 	initLayout();

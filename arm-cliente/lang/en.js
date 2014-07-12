@@ -2,8 +2,6 @@ var lang = {
 		"Extraer Procesos ISO" : "Extract ISO Process",
 		"Nombre:" : "Name:",
 		"Procesamiento:" : "Execution type",
-		"Asistido" : "Assisted",
-		"Sin asistir" : "Not Assisted",
 		"Patrones:" : "Patterns",
 		"Seleccionar archivo" : "Select File",
 		"Extraer Procesos CMMI" : "Extract CMMI Process",
@@ -13,5 +11,17 @@ var lang = {
 		"Resultados" : "Results",
 		"Borrar" : "Delete",
 		"Añadir" : "Add",
-		"Procesar" : "Process"
-}
+		"Eliminar" : "Delete",
+		"Procesar" : "Process",
+		"¿Confirma que desea eliminar el proceso seleccionado?" : "Are you sure you want to delete the selected process?",
+		"Debe seleccionar un proceso de la tabla" : "You must select a table process"
+};
+
+var lang_graph = {
+	printChart: 'Print',
+	downloadPNG: 'Download PNG',
+	downloadJPEG: 'Download JPEG',
+	downloadPDF: 'Download PDF',
+	downloadSVG: 'Download SVG',
+	contextButtonTitle: 'Options'
+};

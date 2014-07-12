@@ -27,8 +27,8 @@ function initLayout(height,width){
 
 function initProcesos(){
 	toolbar_procesos.setSkin("dhx_skyblue");
-	toolbar_procesos.addButton('add',0,'Añadir','css/images/add.png');
-	toolbar_procesos.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_procesos.addButton('add',0,lang['Añadir'],'css/images/add.png');
+	toolbar_procesos.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_procesos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
@@ -37,11 +37,11 @@ function initProcesos(){
 			case "del":
 				var id = mygrid_procesos.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar el proceso seleccionado?')){
+					if(confirm(lang['¿Confirma que desea eliminar el proceso seleccionado?'])){
 					}
 				}
 				else{
-					alert("Debe seleccionar un proceso de la tabla");
+					alert(lang["Debe seleccionar un proceso de la tabla"]);
 				}
 				break;
 		}
@@ -167,6 +167,18 @@ function cargarTareas(){
 }
 
 $(document).ready(function() {
+	var url_array = $(location).attr('href').split('=');
+	
+	if(url_array.length == 2){
+		if(url_array[1] == 'en'){
+			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
+		}else{
+			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+		}
+	}else{
+		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+	}
+	
 	var height = $(window).height()-20;
 	var width = $(window).width()-20;
 	$("#layout").css('height',height+"px");

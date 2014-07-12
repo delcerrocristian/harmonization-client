@@ -92,6 +92,7 @@ function graph(data,type,title,yaxis,series) {
         credits: {
             enabled: false
         },
+        lang : lang_graph,
         series: [{
             name: series,
             colorByPoint: true,
@@ -139,10 +140,22 @@ function graphGeneral(){
         }, {
             name: 'Tareas',
             data: [112, 121, 102]
-        }]
+        }],
+        lang : lang_graph
     });
 }
 
 $(document).ready(function() {
+	var url_array = $(location).attr('href').split('=');
+	
+	if(url_array.length == 2){
+		if(url_array[1] == 'en'){
+			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
+		}else{
+			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+		}
+	}else{
+		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+	}
 	toolbar_top = inicializarToolbar('toolbar');
 });

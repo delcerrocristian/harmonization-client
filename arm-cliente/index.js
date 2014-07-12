@@ -94,6 +94,14 @@ function openCmmi(){
 	$.colorbox({href:"tabla_cmmi.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
+function resultados(){
+	$.colorbox({href:"graficas.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+}
+
+function manual(){
+	$.colorbox({href:"graficas.html",width:'95%',height:'95%,',iframe: true,scrolling : true});
+}
+
 $(document).ready(function() { 
 	var url_array = $(location).attr('href').split('=');
 	

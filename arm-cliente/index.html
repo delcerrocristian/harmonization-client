@@ -15,7 +15,12 @@
     </head>
 
     <body class="body">
-    	<div class="boxes">
+	 	<div style="float:left;">
+	     	<a href="javascript:manual();">
+	     		<img src="css/images/help.png"></img>
+	     	</a>
+		</div>
+    	<div class="boxes" style="float:left;">
 	      	<div class="wrapper roundedCorners loadingcogs" style="float:left;">
 	            <h1 class="pageTitle inter">Extraer Procesos ISO</h1>
 	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
@@ -23,11 +28,6 @@
 	              <div class="top">
 	                <label class="labelFile inter" for="file">Nombre:</label>
 	                <input class="fileName roundedCorners animation" type="text" name="nombre" id="nombre">
-	              </div>
-	              <div class="top">
-	                <label class="labelFile inter">Procesamiento:</label><br>
-	                <input class="asistido" type="radio" name="ejecucion" value="0"><label class="inter">Asistido</label><br>
-	                <input class="no asistido" type="radio" name="ejecucion" value="1"><label class="inter">Sin asistir</label>
 	              </div>
 	              <div class="top" style="padding-bottom: 16px">
 	                <label class="labelFile inter">Patrones:</label><br>
@@ -71,10 +71,10 @@
         </div>
         <div>
         	<a href="?lang=en" title="English">
-        		<img alt="English" src="css/images/england.png" width="30px" height="30px"></img>
+        		<img src="css/images/england.png"></img>
         	</a>
         	<a href="?lang=es" title="Español">
-        		<img src="css/images/spain.png" width="30px" height="30px"></img>
+        		<img src="css/images/spain.png"></img>
         	</a>
         </div>
     </body>

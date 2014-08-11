@@ -102,6 +102,10 @@ function initPracticas(){
 	mygrid_practicas.setColTypes("ch,ed,coro");
 	mygrid_practicas.enableTooltips("false,true,true");
 //	mygrid_practicas.attachEvent("onCheckbox", doOnCheck);
+	
+	mygrid_practicas.getCombo(2).put('1','Ob1');
+	mygrid_practicas.getCombo(2).put('2','Ob2');
+	
 	mygrid_practicas.init();
 	cargarPracticas();
 	mygrid_practicas.enableAutoWidth(true);
@@ -110,12 +114,12 @@ function initPracticas(){
 }
 
 function cargarPracticas(){
-	mygrid_practicas.addRow(1,[0,'4.1 General requirements']);
-	mygrid_practicas.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_practicas.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_practicas.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_practicas.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_practicas.addRow(6,[0,'5.5 Responsibility, authority and communication']);
+	mygrid_practicas.addRow(1,[0,'4.1 General requirements',1]);
+	mygrid_practicas.addRow(2,[0,'4.2 Documentation requirements',1]);
+	mygrid_practicas.addRow(3,[0,'5.1 Management commitment',2]);
+	mygrid_practicas.addRow(4,[0,'5.2 Customer focus',2]);
+	mygrid_practicas.addRow(5,[0,'5.3 Quality policy',1]);
+	mygrid_practicas.addRow(6,[0,'5.5 Responsibility, authority and communication',2]);
 }
 
 function initObjetivos(){

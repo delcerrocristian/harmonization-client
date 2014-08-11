@@ -25,22 +25,22 @@ function inicializarToolbar(nombre){
 		switch(id_opt){
 		case "load":
 			
-//			var dataToDrawStats = [
-//	       		{
-//	       			name : 'Process', 
-//	                   y: 10
-//	       		},
-//	       		{
-//	       			name: 'Activity', 
-//	                   y: 26
-//	       		},
-//	       		{
-//	       			name: 'Task', 
-//	                   y: 102
-//	       		}];
-//			
-//			graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
-			graphGeneral();
+			var dataToDrawStats = [
+	       		{
+	       			name : 'Process', 
+	                   y: 10
+	       		},
+	       		{
+	       			name: 'Activity', 
+	                   y: 26
+	       		},
+	       		{
+	       			name: 'Task', 
+	                   y: 102
+	       		}];
+			
+			graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
+//			graphGeneral();
 			break;
 		case "graficas":
 		case "estandar":

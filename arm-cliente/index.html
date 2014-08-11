@@ -11,7 +11,8 @@
 		<script src="libraries/jquery/jquery-2.1.0.min.js"></script>
 		<script src="libraries/jquery/colorbox/jquery.colorbox.js"></script>
 
-        <script src="index.js"></script> 
+        <script src="index.js"></script>
+        <script src="harmonize.js"></script> 
     </head>
 
     <body class="body">
@@ -24,10 +25,10 @@
 	      	<div class="wrapper roundedCorners loadingcogs" style="float:left;">
 	            <h1 class="pageTitle inter">Extraer Procesos ISO</h1>
 	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
-	              <input class="inputFileInvisible" type="file" name="file" id="file">
+	              <input class="inputFileInvisible fileiso" type="file" name="file_iso" id="file_iso">
 	              <div class="top">
 	                <label class="labelFile inter" for="file">Nombre:</label>
-	                <input class="fileName roundedCorners animation" type="text" name="nombre" id="nombre">
+	                <input class="fileName roundedCorners animation" type="text" name="nombre_iso" id="nombre_iso">
 	              </div>
 	              <div class="top" style="padding-bottom: 16px">
 	                <label class="labelFile inter">Patrones:</label><br>
@@ -36,20 +37,20 @@
 	                </div>
 	                <button class="inputFile roundedCorners animation inter" type="button" name="btpatron" id="btpatron" onclick="addPatron()">Añadir</button>
 	              </div>
-	              <button class="inputFile roundedCorners animation inter" type="button" onclick="chooseFile();">Seleccionar archivo</button>
-	              <button class="inputFile roundedCorners animation inter" type="button" onclick="openCmmi();">Procesar</button>
+	              <button class="inputFile roundedCorners animation inter" type="button" onclick="chooseFile('iso');">Seleccionar archivo</button>
+	              <button class="inputFile roundedCorners animation inter" type="button" onclick="enviar('iso');">Procesar</button>
 	            </form>
 	        </div>
 	        <div class="wrapper roundedCorners loadingcogs" style="float:left;">
 	            <h1 class="pageTitle inter">Extraer Procesos CMMI</h1>
 	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
-	              <input class="inputFileInvisible" type="file" name="file" id="file">
+	              <input class="inputFileInvisible filecmmi" type="file" name="file_cmmi" id="file_cmmi">
 	              <div class="top">
 	                <label class="labelFile inter" for="file">Nombre:</label>
-	                <input class="fileName roundedCorners animation" type="text" name="nombre" id="nombre">
+	                <input class="fileName roundedCorners animation" type="text" name="nombre_cmmi" id="nombre_cmmi">
 	              </div>
-	              <button class="inputFile roundedCorners animation inter" type="button" onclick="chooseFile();">Seleccionar archivo</button>
-	              <button class="inputFile roundedCorners animation inter" type="button" onclick="openIso();">Procesar</button>
+	              <button class="inputFile roundedCorners animation inter" type="button" onclick="chooseFile('cmmi');">Seleccionar archivo</button>
+	              <button class="inputFile roundedCorners animation inter" type="button" onclick="enviar('cmmi');">Procesar</button>
 	            </form>
 	        </div>
 	        <div class="wrapper roundedCorners loadingcogs" style="float:left;">
@@ -57,10 +58,8 @@
 	            <form action="#" method="post" enctype="multipart/form-data" name="uploadFileForm" class="uploadForm">
 	              <div class="top">
 	                <label class="labelFile inter" for="file">Modelo/Estándar:</label>
-	                <select class="fileName roundedCorners animation">
+	                <select class="fileName roundedCorners animation" id="model" name="model">
 	                	<option value=""></option>
-	                	<option value="1">Prueba 1</option>
-	                	<option value="2">Prueba 2</option>
 	                </select>
 	                
 	              </div>

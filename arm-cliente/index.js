@@ -20,14 +20,6 @@ function delPatron(index){
   cont_patron--;
 }
 
-function openIso(){
-	$.colorbox({href:"tabla_iso.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
-}
-
-function openCmmi(){
-	$.colorbox({href:"tabla_cmmi.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
-}
-
 function resultados(){
 	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
@@ -35,3 +27,14 @@ function resultados(){
 function manual(){
 	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
+
+$(document).ready(function() {
+	
+	fillSelect();
+	
+	language();
+	
+	$(".inter").each(function (){
+		$(this).html(lang[$(this).html()]);
+	});
+});

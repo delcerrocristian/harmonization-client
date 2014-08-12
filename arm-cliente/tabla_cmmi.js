@@ -1,4 +1,10 @@
 var dhxLayout;
+var id_standard;
+var all_process;
+var all_specific_goals;
+var all_specific_practices;
+var all_work_products;
+
 
 function initLayout(){
 	dhxLayout = new dhtmlXLayoutObject(document.getElementById("layout"),"4G");
@@ -19,9 +25,11 @@ function initLayout(){
 	mygrid_productos=dhxLayout.cells("d").attachGrid();
 	
 	initProcesos();
-	initPracticas();
 	initObjetivos();
+	initPracticas();
 	initProductos();
+	
+	refreshTables();
 }
 
 function initProcesos(){
@@ -36,7 +44,8 @@ function initProcesos(){
 			case "del":
 				var id = mygrid_procesos.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar el proceso seleccionado?')){
+					if(confirm('¿Confirma que desea eliminar completamente el proceso seleccionado?')){
+						deleteElement('cmmi','process',id,refreshTables);
 					}
 				}
 				else{
@@ -55,22 +64,29 @@ function initProcesos(){
 	mygrid_procesos.setColTypes("ch,ed");
 	mygrid_procesos.enableTooltips("false,true");
 //	mygrid_procesos.attachEvent("onCheckbox", doOnCheck);
+	mygrid_procesos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated_process = $.grep(all_process, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				updated_process[0].name = nValue;
+				
+				console.log(updated_process[0]);
+				
+//				updateElement('cmmi','process',updated_process[0],callback)
+			}
+		}
+	});
 	mygrid_procesos.init();
-	cargarProcesos();
+	
 	mygrid_procesos.enableAutoWidth(true);
 	mygrid_procesos.adjustColumnSize(1);
 	mygrid_procesos.refreshFilters();
 }
-
-function cargarProcesos(){
-	mygrid_procesos.addRow(1,[0,'4.1 General requirements']);
-	mygrid_procesos.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_procesos.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_procesos.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_procesos.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_procesos.addRow(6,[0,'5.5 Responsibility, authority and communication']);
-}
-
 function initPracticas(){
 	toolbar_practicas.setSkin("dhx_skyblue");
 	toolbar_practicas.addButton('add',0,'Añadir','css/images/add.png');
@@ -84,6 +100,7 @@ function initPracticas(){
 				var id = mygrid_practicas.getSelectedRowId();
 				if (id != -1 && id != null){
 					if(confirm('¿Confirma que desea eliminar la actividad seleccionada?')){
+						deleteElement('cmmi','specificpractice',id,refreshTables);
 					}
 				}
 				else{
@@ -103,23 +120,11 @@ function initPracticas(){
 	mygrid_practicas.enableTooltips("false,true,true");
 //	mygrid_practicas.attachEvent("onCheckbox", doOnCheck);
 	
-	mygrid_practicas.getCombo(2).put('1','Ob1');
-	mygrid_practicas.getCombo(2).put('2','Ob2');
-	
 	mygrid_practicas.init();
-	cargarPracticas();
+	
 	mygrid_practicas.enableAutoWidth(true);
 	mygrid_practicas.adjustColumnSize(2);
 	mygrid_practicas.refreshFilters();
-}
-
-function cargarPracticas(){
-	mygrid_practicas.addRow(1,[0,'4.1 General requirements',1]);
-	mygrid_practicas.addRow(2,[0,'4.2 Documentation requirements',1]);
-	mygrid_practicas.addRow(3,[0,'5.1 Management commitment',2]);
-	mygrid_practicas.addRow(4,[0,'5.2 Customer focus',2]);
-	mygrid_practicas.addRow(5,[0,'5.3 Quality policy',1]);
-	mygrid_practicas.addRow(6,[0,'5.5 Responsibility, authority and communication',2]);
 }
 
 function initObjetivos(){
@@ -135,6 +140,7 @@ function initObjetivos(){
 				var id = mygrid_objetivos.getSelectedRowId();
 				if (id != -1 && id != null){
 					if(confirm('¿Confirma que desea eliminar el objetivo específico seleccionado?')){
+						deleteElement('cmmi','specificgoal',id,refreshTables);
 					}
 				}
 				else{
@@ -154,19 +160,10 @@ function initObjetivos(){
 	mygrid_objetivos.enableTooltips("false,true,true");
 //	mygrid_objetivos.attachEvent("onCheckbox", doOnCheck);
 	mygrid_objetivos.init();
-	cargarObjetivos();
+	
 	mygrid_objetivos.enableAutoWidth(true);
 	mygrid_objetivos.adjustColumnSize(2);
 	mygrid_objetivos.refreshFilters();
-}
-
-function cargarObjetivos(){
-	mygrid_objetivos.addRow(1,[0,'4.1 General requirements']);
-	mygrid_objetivos.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_objetivos.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_objetivos.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_objetivos.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_objetivos.addRow(6,[0,'5.5 Responsibility, authority and communication']);
 }
 
 function initProductos(){
@@ -182,6 +179,7 @@ function initProductos(){
 				var id = mygrid_productos.getSelectedRowId();
 				if (id != -1 && id != null){
 					if(confirm('¿Confirma que desea eliminar el producto de trabajo seleccionado?')){
+						deleteElement('cmmi','workproduct',id,refreshTables);
 					}
 				}
 				else{
@@ -201,33 +199,64 @@ function initProductos(){
 	mygrid_productos.enableTooltips("false,true,true");
 //	mygrid_productos.attachEvent("onCheckbox", doOnCheck);
 	mygrid_productos.init();
-	cargarProductos();
+	
 	mygrid_productos.enableAutoWidth(true);
 	mygrid_productos.adjustColumnSize(2);
 	mygrid_productos.refreshFilters();
 }
 
-function cargarProductos(){
-	mygrid_productos.addRow(1,[0,'4.1 General requirements']);
-	mygrid_productos.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_productos.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_productos.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_productos.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_productos.addRow(6,[0,'5.5 Responsibility, authority and communication']);
+function refreshTables(){
+	mygrid_procesos.clearAll();
+	mygrid_objetivos.clearAll();
+	mygrid_practicas.clearAll();
+	mygrid_productos.clearAll();
+	
+	
+	getElements('cmmi','process',id_standard,function(elements) {
+		all_process = elements;
+		elements.forEach(function(element) {
+			mygrid_procesos.addRow(element.id,[0,element.name]);
+		});
+	});
+	
+	all_process.forEach(function(element) {
+		mygrid_objetivos.getCombo(2).put(element.id,element.name);
+	});	
+	
+	getElements('cmmi','specificgoal',id_standard,function(elements) {
+		all_specific_goals = elements;
+		elements.forEach(function(element) {
+			mygrid_objetivos.addRow(element.id,[0,element.title,element.process]);
+		});
+	});
+	
+	all_specific_goals.forEach(function(element) {
+		mygrid_practicas.getCombo(2).put(element.id,element.title);
+	});
+	
+	getElements('cmmi','specificpractice',id_standard,function(elements) {
+		all_specific_practices = elements;
+		elements.forEach(function(element) {
+			mygrid_practicas.addRow(element.id,[0,element.title,element.specificGoal]);
+		});
+	});
+	
+	all_specific_practices.forEach(function(element) {
+		mygrid_productos.getCombo(2).put(element.id,element.title);
+	});
+	
+	getElements('cmmi','workproduct',id_standard,function(elements) {
+		all_work_products = elements;
+		elements.forEach(function(element) {
+			mygrid_productos.addRow(element.id,[0,element.description,element.specificPractice]);
+		});
+	});
 }
 
 $(document).ready(function() {
-	var url_array = $(location).attr('href').split('=');
+	language();
 	
-	if(url_array.length == 2){
-		if(url_array[1] == 'en'){
-			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
-		}else{
-			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-		}
-	}else{
-		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-	}
+	id_standard = getParameterByName('id');
 	
 	var height = $(window).height()-20;
 	$("#layout").css('height',height+"px");

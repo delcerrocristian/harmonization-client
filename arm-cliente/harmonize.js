@@ -31,6 +31,7 @@ function enviar(type){
 		cache:false //Para que el formulario no guarde cache
 	}).done(function(id){
 		addModelToSelect(id,name,type);
+		
 	});
 	
 }
@@ -57,8 +58,34 @@ function addModelsToSelect(models){
 	});
 }
 
-$(document).ready(function() {
+function openTable(id,type){
 	
+	var url_table = "tabla_"+type+url_lang+"&id="+id;
+	
+	$.colorbox({href:url_table,width:'95%',height:'95%,',iframe: true,scrolling : true});
+}
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function language(){
+	var short_lang = getParameterByName('lang');
+	
+	if(short_lang == 'en'){
+		lang_es = false;
+		url_lang = "?lang=en";
+		$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
+	}else{
+		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
+		url_lang = "?lang=es";
+	}
+}
+
+function fillSelect(){
 	$.ajax({
 		url:urlApi+"/standard/all", //Url a donde la enviaremos
 		type:'GET', //Metodo que usaremos
@@ -68,22 +95,42 @@ $(document).ready(function() {
 	}).done(function(models){
 		addModelsToSelect(models);
 	});
-	
-	var url_array = $(location).attr('href').split('=');
-	
-	if(url_array.length == 2){
-		if(url_array[1] == 'en'){
-			lang_es = false;
-			url_lang = "?lang=en";
-			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
-		}else{
-			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-		}
-		
-		$(".inter").each(function (){
-			$(this).html(lang[$(this).html()]);
-		});
-	}else{
-		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-	}
-}); 
+}
+
+function getElements(type,type_element,id_standard,callback){
+	$.ajax({
+		url:urlApi+"/"+type+"/all"+type_element+"?standard="+id_standard, //Url a donde la enviaremos
+		type:'GET', //Metodo que usaremos
+		contentType:false, //Debe estar en false para que pase el objeto sin procesar
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		async:false,
+		cache:false //Para que el formulario no guarde cache
+	}).done(function(elements){
+		callback(elements);
+	});
+}
+
+function deleteElement(type,type_element,id,callback){
+	$.ajax({
+		url:urlApi+"/"+type+"/"+type_element+"?id="+id, //Url a donde la enviaremos
+		type:'DELETE', //Metodo que usaremos
+		contentType:false, //Debe estar en false para que pase el objeto sin procesar
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		cache:false //Para que el formulario no guarde cache
+	}).done(function(){
+		callback();
+	});
+}
+
+function updateElement(type,type_element,object,callback){
+	$.ajax({
+		url:urlApi+"/"+type+"/"+type_element, //Url a donde la enviaremos
+		type:'PUT', //Metodo que usaremos
+		contentType:false, //Debe estar en false para que pase el objeto sin procesar
+		data:object,
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		cache:false //Para que el formulario no guarde cache
+	}).done(function(){
+		callback();
+	});
+}

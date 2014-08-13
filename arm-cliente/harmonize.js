@@ -126,8 +126,9 @@ function updateElement(type,type_element,object,callback){
 	$.ajax({
 		url:urlApi+"/"+type+"/"+type_element, //Url a donde la enviaremos
 		type:'PUT', //Metodo que usaremos
-		contentType:false, //Debe estar en false para que pase el objeto sin procesar
-		data:object,
+		contentType:"application/json",
+		accept: "application/json",//Debe estar en false para que pase el objeto sin procesar
+		data:JSON.stringify(object),
 		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
 		cache:false //Para que el formulario no guarde cache
 	}).done(function(){

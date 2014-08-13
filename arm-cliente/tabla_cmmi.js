@@ -57,34 +57,32 @@ function initProcesos(){
 	
 	mygrid_procesos.setSkin("dhx_skyblue");
 	mygrid_procesos.setImagePath("css/images/");
-	mygrid_procesos.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Proceso</b></center>");
-	mygrid_procesos.attachHeader(",#text_filter");
-	mygrid_procesos.setInitWidthsP("14,*");
-	mygrid_procesos.setColAlign("center,left");
-	mygrid_procesos.setColTypes("ch,ed");
-	mygrid_procesos.enableTooltips("false,true");
+	mygrid_procesos.setHeader("<center><b>Proceso</b></center>");
+	mygrid_procesos.attachHeader("#text_filter");
+	mygrid_procesos.setInitWidthsP("*");
+	mygrid_procesos.setColAlign("left");
+	mygrid_procesos.setColTypes("ed");
+	mygrid_procesos.enableTooltips("true");
 //	mygrid_procesos.attachEvent("onCheckbox", doOnCheck);
 	mygrid_procesos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
 		if(stage==2){
 			if (nValue != oValue){
-				var updated_process = $.grep(all_process, function(obj) {
+				var updated = $.grep(all_process, function(obj) {
 				   if(obj.id === rowId){
 					   return obj;
 				   }
 				});
 				
-				updated_process[0].name = nValue;
-				
-				console.log(updated_process[0]);
-				
-//				updateElement('cmmi','process',updated_process[0],callback)
+				updated[0].name = nValue;
+								
+				updateElement('cmmi','process',updated[0],refreshTables)
 			}
 		}
 	});
 	mygrid_procesos.init();
 	
 	mygrid_procesos.enableAutoWidth(true);
-	mygrid_procesos.adjustColumnSize(1);
+	mygrid_procesos.adjustColumnSize(0);
 	mygrid_procesos.refreshFilters();
 }
 function initPracticas(){
@@ -112,18 +110,42 @@ function initPracticas(){
 	
 	mygrid_practicas.setSkin("dhx_skyblue");
 	mygrid_practicas.setImagePath("css/images/");
-	mygrid_practicas.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Práctica Específica</b></center>"+","+"<center><b>Objetivo Específico</b></center>");
-	mygrid_practicas.attachHeader(",#text_filter,#select_filter_strict");
-	mygrid_practicas.setInitWidthsP("14,55,*");
-	mygrid_practicas.setColAlign("center,left,left");
-	mygrid_practicas.setColTypes("ch,ed,coro");
-	mygrid_practicas.enableTooltips("false,true,true");
+	mygrid_practicas.setHeader("<center><b>Práctica Específica</b></center>"+","+"<center><b>Objetivo Específico</b></center>");
+	mygrid_practicas.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_practicas.setInitWidthsP("60,*");
+	mygrid_practicas.setColAlign("left,left");
+	mygrid_practicas.setColTypes("ed,coro");
+	mygrid_practicas.enableTooltips("true,true");
 //	mygrid_practicas.attachEvent("onCheckbox", doOnCheck);
+	
+	mygrid_practicas.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated = $.grep(all_specific_practices, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				switch (cellId) {
+					case 0:
+						updated[0].title = nValue;
+						break;
+					case 1:
+						updated[0].specificGoal = nValue;
+						break;
+				}
+				
+								
+				updateElement('cmmi','specificpractice',updated[0],refreshTables)
+			}
+		}
+	});
 	
 	mygrid_practicas.init();
 	
 	mygrid_practicas.enableAutoWidth(true);
-	mygrid_practicas.adjustColumnSize(2);
+	mygrid_practicas.adjustColumnSize(1);
 	mygrid_practicas.refreshFilters();
 }
 
@@ -152,17 +174,42 @@ function initObjetivos(){
 	
 	mygrid_objetivos.setSkin("dhx_skyblue");
 	mygrid_objetivos.setImagePath("css/images/");
-	mygrid_objetivos.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Objetivo Específico</b></center>"+","+"<center><b>Proceso</b></center>");
-	mygrid_objetivos.attachHeader(",#text_filter,#select_filter_strict");
-	mygrid_objetivos.setInitWidthsP("14,50,*");
-	mygrid_objetivos.setColAlign("center,left,left");
-	mygrid_objetivos.setColTypes("ch,ed,coro");
-	mygrid_objetivos.enableTooltips("false,true,true");
+	mygrid_objetivos.setHeader("<center><b>Objetivo Específico</b></center>"+","+"<center><b>Proceso</b></center>");
+	mygrid_objetivos.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_objetivos.setInitWidthsP("60,*");
+	mygrid_objetivos.setColAlign("left,left");
+	mygrid_objetivos.setColTypes("ed,coro");
+	mygrid_objetivos.enableTooltips("true,true");
 //	mygrid_objetivos.attachEvent("onCheckbox", doOnCheck);
+	
+	mygrid_objetivos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated = $.grep(all_specific_goals, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				switch (cellId) {
+					case 0:
+						updated[0].title = nValue;
+						break;
+					case 1:
+						updated[0].process = nValue;
+						break;
+				}
+				
+								
+				updateElement('cmmi','specificgoal',updated[0],refreshTables)
+			}
+		}
+	});
+	
 	mygrid_objetivos.init();
 	
 	mygrid_objetivos.enableAutoWidth(true);
-	mygrid_objetivos.adjustColumnSize(2);
+	mygrid_objetivos.adjustColumnSize(1);
 	mygrid_objetivos.refreshFilters();
 }
 
@@ -191,17 +238,42 @@ function initProductos(){
 	
 	mygrid_productos.setSkin("dhx_skyblue");
 	mygrid_productos.setImagePath("css/images/");
-	mygrid_productos.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Producto de trabajo</b></center>"+","+"<center><b>Práctica Específica</b></center>");
-	mygrid_productos.attachHeader(",#text_filter,#select_filter_strict");
-	mygrid_productos.setInitWidthsP("14,50,*");
-	mygrid_productos.setColAlign("center,left,left");
-	mygrid_productos.setColTypes("ch,ed,coro");
-	mygrid_productos.enableTooltips("false,true,true");
+	mygrid_productos.setHeader("<center><b>Producto de trabajo</b></center>"+","+"<center><b>Práctica Específica</b></center>");
+	mygrid_productos.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_productos.setInitWidthsP("60,*");
+	mygrid_productos.setColAlign("left,left");
+	mygrid_productos.setColTypes("ed,coro");
+	mygrid_productos.enableTooltips("true,true");
 //	mygrid_productos.attachEvent("onCheckbox", doOnCheck);
+	
+	mygrid_productos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated = $.grep(all_work_products, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				switch (cellId) {
+					case 0:
+						updated[0].description = nValue;
+						break;
+					case 1:
+						updated[0].specificPractice = nValue;
+						break;
+				}
+				
+								
+				updateElement('cmmi','workproduct',updated[0],refreshTables)
+			}
+		}
+	});
+	
 	mygrid_productos.init();
 	
 	mygrid_productos.enableAutoWidth(true);
-	mygrid_productos.adjustColumnSize(2);
+	mygrid_productos.adjustColumnSize(1);
 	mygrid_productos.refreshFilters();
 }
 
@@ -215,40 +287,40 @@ function refreshTables(){
 	getElements('cmmi','process',id_standard,function(elements) {
 		all_process = elements;
 		elements.forEach(function(element) {
-			mygrid_procesos.addRow(element.id,[0,element.name]);
+			mygrid_procesos.addRow(element.id,[element.name]);
 		});
 	});
 	
 	all_process.forEach(function(element) {
-		mygrid_objetivos.getCombo(2).put(element.id,element.name);
+		mygrid_objetivos.getCombo(1).put(element.id,element.name);
 	});	
 	
 	getElements('cmmi','specificgoal',id_standard,function(elements) {
 		all_specific_goals = elements;
 		elements.forEach(function(element) {
-			mygrid_objetivos.addRow(element.id,[0,element.title,element.process]);
+			mygrid_objetivos.addRow(element.id,[element.title,element.process]);
 		});
 	});
 	
 	all_specific_goals.forEach(function(element) {
-		mygrid_practicas.getCombo(2).put(element.id,element.title);
+		mygrid_practicas.getCombo(1).put(element.id,element.title);
 	});
 	
 	getElements('cmmi','specificpractice',id_standard,function(elements) {
 		all_specific_practices = elements;
 		elements.forEach(function(element) {
-			mygrid_practicas.addRow(element.id,[0,element.title,element.specificGoal]);
+			mygrid_practicas.addRow(element.id,[element.title,element.specificGoal]);
 		});
 	});
 	
 	all_specific_practices.forEach(function(element) {
-		mygrid_productos.getCombo(2).put(element.id,element.title);
+		mygrid_productos.getCombo(1).put(element.id,element.title);
 	});
 	
 	getElements('cmmi','workproduct',id_standard,function(elements) {
 		all_work_products = elements;
 		elements.forEach(function(element) {
-			mygrid_productos.addRow(element.id,[0,element.description,element.specificPractice]);
+			mygrid_productos.addRow(element.id,[element.description,element.specificPractice]);
 		});
 	});
 }

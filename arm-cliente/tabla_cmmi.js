@@ -63,7 +63,6 @@ function initProcesos(){
 	mygrid_procesos.setColAlign("left");
 	mygrid_procesos.setColTypes("ed");
 	mygrid_procesos.enableTooltips("true");
-//	mygrid_procesos.attachEvent("onCheckbox", doOnCheck);
 	mygrid_procesos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
 		if(stage==2){
 			if (nValue != oValue){
@@ -116,7 +115,6 @@ function initPracticas(){
 	mygrid_practicas.setColAlign("left,left");
 	mygrid_practicas.setColTypes("ed,coro");
 	mygrid_practicas.enableTooltips("true,true");
-//	mygrid_practicas.attachEvent("onCheckbox", doOnCheck);
 	
 	mygrid_practicas.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
 		if(stage==2){
@@ -180,7 +178,6 @@ function initObjetivos(){
 	mygrid_objetivos.setColAlign("left,left");
 	mygrid_objetivos.setColTypes("ed,coro");
 	mygrid_objetivos.enableTooltips("true,true");
-//	mygrid_objetivos.attachEvent("onCheckbox", doOnCheck);
 	
 	mygrid_objetivos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
 		if(stage==2){
@@ -244,7 +241,6 @@ function initProductos(){
 	mygrid_productos.setColAlign("left,left");
 	mygrid_productos.setColTypes("ed,coro");
 	mygrid_productos.enableTooltips("true,true");
-//	mygrid_productos.attachEvent("onCheckbox", doOnCheck);
 	
 	mygrid_productos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
 		if(stage==2){

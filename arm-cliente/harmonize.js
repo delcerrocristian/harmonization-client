@@ -135,3 +135,18 @@ function updateElement(type,type_element,object,callback){
 		callback();
 	});
 }
+
+function addElement(type,type_element,object,callback,returnId){
+	$.ajax({
+		url:urlApi+"/"+type+"/"+type_element, //Url a donde la enviaremos
+		type:'POST', //Metodo que usaremos
+		contentType:"application/json",
+		accept: "application/json",//Debe estar en false para que pase el objeto sin procesar
+		data:JSON.stringify(object),
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		cache:false //Para que el formulario no guarde cache
+	}).done(function(id){
+		callback();
+		returnId(id);
+	});
+}

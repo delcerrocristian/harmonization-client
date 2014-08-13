@@ -1,4 +1,8 @@
 var dhxLayout;
+var id_standard;
+var all_process;
+var all_activities;
+var all_tasks;
 
 function initLayout(height,width){
 	dhxLayout = new dhtmlXLayoutObject(document.getElementById("layout"),"3J");
@@ -23,6 +27,51 @@ function initLayout(height,width){
 	initProcesos();
 	initActividades();
 	initTareas();
+	
+	refreshTables();
+}
+
+function refreshTables(){
+	
+	mygrid_procesos.clearAll();
+	mygrid_tareas.clearAll();
+	mygrid_actividades.clearAll();
+	
+	
+	getElements('iso','process',id_standard,function(elements) {
+		all_process = elements;
+		elements.forEach(function(element) {
+			mygrid_procesos.addRow(element.id,[element.name]);
+		});
+	});
+		
+	all_process.forEach(function(element) {
+		mygrid_tareas.getCombo(1).put(element.id,element.name);
+		mygrid_actividades.getCombo(1).put(element.id,element.name);
+	});	
+	
+	getElements('iso','activity',id_standard,function(elements) {
+		all_activities = elements;
+		elements.forEach(function(element) {
+			mygrid_actividades.addRow(element.id,[element.name,element.process]);
+		});
+	});
+	
+	all_activities.forEach(function(element) {
+		mygrid_tareas.getCombo(2).put(element.id,element.name);
+	});
+	
+	getElements('iso','task',id_standard,function(elements) {
+		all_tasks = elements;
+		elements.forEach(function(element) {
+			mygrid_tareas.addRow(element.id,[element.content,element.process,element.activity]);
+		});
+	});
+	
+	mygrid_procesos.refreshFilters();
+	mygrid_tareas.refreshFilters();
+	mygrid_actividades.refreshFilters();
+
 }
 
 function initProcesos(){
@@ -32,12 +81,18 @@ function initProcesos(){
 	
 	toolbar_procesos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				var object = {standard:id_standard,name:"New process"};
+				addElement('iso','process',object,refreshTables,function (id) {
+					mygrid_procesos.selectRowById(id,false,true,false);
+				});
+				
 				break;
 			case "del":
 				var id = mygrid_procesos.getSelectedRowId();
 				if (id != -1 && id != null){
 					if(confirm(lang['¿Confirma que desea eliminar el proceso seleccionado?'])){
+						deleteElement('iso','process',id,refreshTables);
 					}
 				}
 				else{
@@ -49,27 +104,34 @@ function initProcesos(){
 	
 	mygrid_procesos.setSkin("dhx_skyblue");
 	mygrid_procesos.setImagePath("css/images/");
-	mygrid_procesos.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Proceso</b></center>");
-	mygrid_procesos.attachHeader(",#text_filter");
-	mygrid_procesos.setInitWidthsP("14,*");
-	mygrid_procesos.setColAlign("center,left");
-	mygrid_procesos.setColTypes("ch,ed");
-	mygrid_procesos.enableTooltips("false,true");
-//	mygrid_procesos.attachEvent("onCheckbox", doOnCheck);
+	mygrid_procesos.setHeader("<center><b>Proceso</b></center>");
+	mygrid_procesos.attachHeader("#text_filter");
+	mygrid_procesos.setInitWidthsP("*");
+	mygrid_procesos.setColAlign("left");
+	mygrid_procesos.setColTypes("ed");
+	mygrid_procesos.enableTooltips("true");
+	
+	mygrid_procesos.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated = $.grep(all_process, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				updated[0].name = nValue;
+								
+				updateElement('iso','process',updated[0],refreshTables)
+			}
+		}
+	});
+	
 	mygrid_procesos.init();
-	cargarProcesos();
+	
 	mygrid_procesos.enableAutoWidth(true);
-	mygrid_procesos.adjustColumnSize(1);
+	mygrid_procesos.adjustColumnSize(0);
 	mygrid_procesos.refreshFilters();
-}
-
-function cargarProcesos(){
-	mygrid_procesos.addRow(1,[0,'4.1 General requirements']);
-	mygrid_procesos.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_procesos.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_procesos.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_procesos.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_procesos.addRow(6,[0,'5.5 Responsibility, authority and communication']);
 }
 
 function initActividades(){
@@ -79,12 +141,24 @@ function initActividades(){
 	
 	toolbar_actividades.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				var id_process = mygrid_procesos.getSelectedRowId();
+				if (id_process != -1 && id_process != null){
+					var object = {process:id_process,name:"New activity"};
+					addElement('iso','activity',object,refreshTables,function (id) {
+						mygrid_actividades.selectRowById(id,false,true,false);
+					});
+				}
+				else{
+					alert(lang["Debe seleccionar un proceso de la tabla"]);
+				}
+				
 				break;
 			case "del":
 				var id = mygrid_actividades.getSelectedRowId();
 				if (id != -1 && id != null){
 					if(confirm('¿Confirma que desea eliminar la actividad seleccionada?')){
+						deleteElement('iso','activity',id,refreshTables);
 					}
 				}
 				else{
@@ -96,27 +170,41 @@ function initActividades(){
 	
 	mygrid_actividades.setSkin("dhx_skyblue");
 	mygrid_actividades.setImagePath("css/images/");
-	mygrid_actividades.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Actividad</b></center>"+","+"<center><b>Proceso</b></center>");
-	mygrid_actividades.attachHeader(",#text_filter,#select_filter_strict");
-	mygrid_actividades.setInitWidthsP("14,55,*");
-	mygrid_actividades.setColAlign("center,left,left");
-	mygrid_actividades.setColTypes("ch,ed,coro");
-	mygrid_actividades.enableTooltips("false,true,true");
-//	mygrid_actividades.attachEvent("onCheckbox", doOnCheck);
+	mygrid_actividades.setHeader("<center><b>Actividad</b></center>"+","+"<center><b>Proceso</b></center>");
+	mygrid_actividades.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_actividades.setInitWidthsP("65,*");
+	mygrid_actividades.setColAlign("left,left");
+	mygrid_actividades.setColTypes("ed,coro");
+	mygrid_actividades.enableTooltips("true,true");
+	
+	mygrid_actividades.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated = $.grep(all_activities, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				switch (cellId) {
+					case 0:
+						updated[0].name = nValue;
+						break;
+					case 1:
+						updated[0].process = nValue;
+						break;
+				}
+				
+								
+				updateElement('iso','activity',updated[0],refreshTables)
+			}
+		}
+	});
+	
 	mygrid_actividades.init();
-	cargarActividades();
 	mygrid_actividades.enableAutoWidth(true);
-	mygrid_actividades.adjustColumnSize(2);
+	mygrid_actividades.adjustColumnSize(1);
 	mygrid_actividades.refreshFilters();
-}
-
-function cargarActividades(){
-	mygrid_actividades.addRow(1,[0,'4.1 General requirements']);
-	mygrid_actividades.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_actividades.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_actividades.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_actividades.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_actividades.addRow(6,[0,'5.5 Responsibility, authority and communication']);
 }
 
 function initTareas(){
@@ -126,12 +214,27 @@ function initTareas(){
 	
 	toolbar_tareas.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				var id_process = mygrid_procesos.getSelectedRowId();
+				if (id_process != -1 && id_process != null){
+					
+					var id_activity = mygrid_actividades.getSelectedRowId();
+					if (id_activity == -1 || id_activity == null) id_activity = null;
+					
+					var object = {process:id_process,content:"New task",activity:id_activity};
+					addElement('iso','task',object,refreshTables,function (id) {
+						mygrid_tareas.selectRowById(id,false,true,false);
+					});
+				}
+				else{
+					alert(lang["Debe seleccionar un proceso de la tabla"]);
+				}
 				break;
 			case "del":
 				var id = mygrid_tareas.getSelectedRowId();
 				if (id != -1 && id != null){
 					if(confirm('¿Confirma que desea eliminar la tarea seleccionada?')){
+						deleteElement('iso','task',id,refreshTables);
 					}
 				}
 				else{
@@ -143,41 +246,50 @@ function initTareas(){
 	
 	mygrid_tareas.setSkin("dhx_skyblue");
 	mygrid_tareas.setImagePath("css/images/");
-	mygrid_tareas.setHeader("<center><b>Seleccionar</b></center>"+","+"<center><b>Tarea</b></center>"+","+"<center><b>Proceso</b></center>"+","+"<center><b>Actividad</b></center>");
-	mygrid_tareas.attachHeader(",#text_filter,#select_filter_strict,#select_filter_strict");
-	mygrid_tareas.setInitWidthsP("10,50,20,*");
-	mygrid_tareas.setColAlign("center,left,left,left");
-	mygrid_tareas.setColTypes("ch,ed,coro,coro");
-	mygrid_tareas.enableTooltips("false,true,true,true");
-//	mygrid_tareas.attachEvent("onCheckbox", doOnCheck);
+	mygrid_tareas.setHeader("<center><b>Tarea</b></center>"+","+"<center><b>Proceso</b></center>"+","+"<center><b>Actividad</b></center>");
+	mygrid_tareas.attachHeader("#text_filter,#select_filter_strict,#select_filter_strict");
+	mygrid_tareas.setInitWidthsP("55,20,*");
+	mygrid_tareas.setColAlign("left,left,left");
+	mygrid_tareas.setColTypes("ed,coro,coro");
+	mygrid_tareas.enableTooltips("true,true,true");
+	
+	mygrid_tareas.attachEvent("onEditCell", function(stage,rowId,cellId,nValue,oValue) {
+		if(stage==2){
+			if (nValue != oValue){
+				var updated = $.grep(all_tasks, function(obj) {
+				   if(obj.id === rowId){
+					   return obj;
+				   }
+				});
+				
+				switch (cellId) {
+					case 0:
+						updated[0].content = nValue;
+						break;
+					case 1:
+						updated[0].process = nValue;
+						break;
+					case 2:
+						updated[0].activity = nValue;
+						break;
+				}
+				
+								
+				updateElement('iso','task',updated[0],refreshTables)
+			}
+		}
+	});
+	
 	mygrid_tareas.init();
-	cargarTareas();
 	mygrid_tareas.enableAutoWidth(true);
-	mygrid_tareas.adjustColumnSize(3);
+	mygrid_tareas.adjustColumnSize(2);
 	mygrid_tareas.refreshFilters();
 }
 
-function cargarTareas(){
-	mygrid_tareas.addRow(1,[0,'4.1 General requirements']);
-	mygrid_tareas.addRow(2,[0,'4.2 Documentation requirements']);
-	mygrid_tareas.addRow(3,[0,'5.1 Management commitment']);
-	mygrid_tareas.addRow(4,[0,'5.2 Customer focus']);
-	mygrid_tareas.addRow(5,[0,'5.3 Quality policy']);
-	mygrid_tareas.addRow(6,[0,'5.5 Responsibility, authority and communication']);
-}
-
 $(document).ready(function() {
-	var url_array = $(location).attr('href').split('=');
+	language();
 	
-	if(url_array.length == 2){
-		if(url_array[1] == 'en'){
-			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
-		}else{
-			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-		}
-	}else{
-		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-	}
+	id_standard = parseInt(getParameterByName('id'));
 	
 	var height = $(window).height()-20;
 	var width = $(window).width()-20;

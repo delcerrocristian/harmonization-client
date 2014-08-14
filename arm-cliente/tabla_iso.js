@@ -131,7 +131,6 @@ function initProcesos(){
 	
 	mygrid_procesos.enableAutoWidth(true);
 	mygrid_procesos.adjustColumnSize(0);
-	mygrid_procesos.refreshFilters();
 }
 
 function initActividades(){
@@ -204,7 +203,6 @@ function initActividades(){
 	mygrid_actividades.init();
 	mygrid_actividades.enableAutoWidth(true);
 	mygrid_actividades.adjustColumnSize(1);
-	mygrid_actividades.refreshFilters();
 }
 
 function initTareas(){
@@ -283,7 +281,6 @@ function initTareas(){
 	mygrid_tareas.init();
 	mygrid_tareas.enableAutoWidth(true);
 	mygrid_tareas.adjustColumnSize(2);
-	mygrid_tareas.refreshFilters();
 }
 
 $(document).ready(function() {

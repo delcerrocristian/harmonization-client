@@ -34,12 +34,13 @@ function initLayout(){
 
 function initProcesos(){
 	toolbar_procesos.setSkin("dhx_skyblue");
-	toolbar_procesos.addButton('add',0,'Añadir','css/images/add.png');
+	toolbar_procesos.addButton('add',0,'Detalles','css/images/add.png');
 	toolbar_procesos.addButton('del',1,'Eliminar','css/images/del.png');
 	
 	toolbar_procesos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				window.location = "tabla_cmmi_procesos.html?id="+id_standard;
 				break;
 			case "del":
 				var id = mygrid_procesos.getSelectedRowId();
@@ -82,16 +83,16 @@ function initProcesos(){
 	
 	mygrid_procesos.enableAutoWidth(true);
 	mygrid_procesos.adjustColumnSize(0);
-	mygrid_procesos.refreshFilters();
 }
 function initPracticas(){
 	toolbar_practicas.setSkin("dhx_skyblue");
-	toolbar_practicas.addButton('add',0,'Añadir','css/images/add.png');
+	toolbar_practicas.addButton('add',0,'Detalles','css/images/add.png');
 	toolbar_practicas.addButton('del',1,'Eliminar','css/images/del.png');
 	
 	toolbar_practicas.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				window.location = "tabla_cmmi_practicas.html?id="+id_standard;
 				break;
 			case "del":
 				var id = mygrid_practicas.getSelectedRowId();
@@ -144,17 +145,17 @@ function initPracticas(){
 	
 	mygrid_practicas.enableAutoWidth(true);
 	mygrid_practicas.adjustColumnSize(1);
-	mygrid_practicas.refreshFilters();
 }
 
 function initObjetivos(){
 	toolbar_objetivos.setSkin("dhx_skyblue");
-	toolbar_objetivos.addButton('add',0,'Añadir','css/images/add.png');
+	toolbar_objetivos.addButton('add',0,'Detalles','css/images/add.png');
 	toolbar_objetivos.addButton('del',1,'Eliminar','css/images/del.png');
 	
 	toolbar_objetivos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				window.location = "tabla_cmmi_objetivos.html?id="+id_standard;
 				break;
 			case "del":
 				var id = mygrid_objetivos.getSelectedRowId();
@@ -207,7 +208,6 @@ function initObjetivos(){
 	
 	mygrid_objetivos.enableAutoWidth(true);
 	mygrid_objetivos.adjustColumnSize(1);
-	mygrid_objetivos.refreshFilters();
 }
 
 function initProductos(){
@@ -217,7 +217,11 @@ function initProductos(){
 	
 	toolbar_productos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
-			case "copy":
+			case "add":
+				var object = {description:"New Work Product",specificPractice:all_specific_practices[0].id};
+				addElement('cmmi','workproduct',object,refreshTables,function (id) {
+					mygrid_productos.selectRowById(id,false,true,false);
+				});
 				break;
 			case "del":
 				var id = mygrid_productos.getSelectedRowId();
@@ -261,7 +265,8 @@ function initProductos(){
 				}
 				
 								
-				updateElement('cmmi','workproduct',updated[0],refreshTables)
+				updateElement('cmmi','workproduct',updated[0],function(){});
+				return true;
 			}
 		}
 	});
@@ -270,7 +275,6 @@ function initProductos(){
 	
 	mygrid_productos.enableAutoWidth(true);
 	mygrid_productos.adjustColumnSize(1);
-	mygrid_productos.refreshFilters();
 }
 
 function refreshTables(){
@@ -319,12 +323,17 @@ function refreshTables(){
 			mygrid_productos.addRow(element.id,[element.description,element.specificPractice]);
 		});
 	});
+	
+	mygrid_procesos.refreshFilters();
+	mygrid_objetivos.refreshFilters();
+	mygrid_practicas.refreshFilters();
+	mygrid_productos.refreshFilters();
 }
 
 $(document).ready(function() {
 	language();
 	
-	id_standard = getParameterByName('id');
+	id_standard = parseInt(getParameterByName('id'));
 	
 	var height = $(window).height()-20;
 	$("#layout").css('height',height+"px");

@@ -163,7 +163,7 @@ function initActividades(){
 	mygrid_actividades.setSkin("dhx_skyblue");
 	mygrid_actividades.setImagePath("css/images/");
 	mygrid_actividades.setHeader("<center><b>"+lang["Actividad"]+"</b></center>,<center><b>"+lang["Proceso"]+"</b></center>");
-	mygrid_actividades.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_actividades.attachHeader("#text_filter,#select_filter");
 	mygrid_actividades.setInitWidthsP("65,*");
 	mygrid_actividades.setColAlign("left,left");
 	mygrid_actividades.setColTypes("ed,coro");
@@ -228,7 +228,7 @@ function initTareas(){
 	mygrid_tareas.setSkin("dhx_skyblue");
 	mygrid_tareas.setImagePath("css/images/");
 	mygrid_tareas.setHeader("<center><b>"+lang["Tarea"]+"</b></center>,<center><b>"+lang["Proceso"]+"</b></center>,<center><b>"+lang["Actividad"]+"</b></center>");
-	mygrid_tareas.attachHeader("#text_filter,#select_filter_strict,#select_filter_strict");
+	mygrid_tareas.attachHeader("#text_filter,#select_filter,#select_filter");
 	mygrid_tareas.setInitWidthsP("55,20,*");
 	mygrid_tareas.setColAlign("left,left,left");
 	mygrid_tareas.setColTypes("ed,coro,coro");

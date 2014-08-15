@@ -111,7 +111,7 @@ function initPracticas(){
 	mygrid_practicas.setSkin("dhx_skyblue");
 	mygrid_practicas.setImagePath("css/images/");
 	mygrid_practicas.setHeader("<center><b>"+lang["Práctica Específica"]+"</b></center>,<center><b>"+lang["Objetivo Específico"]+"</b></center>");
-	mygrid_practicas.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_practicas.attachHeader("#text_filter,#select_filter");
 	mygrid_practicas.setInitWidthsP("60,*");
 	mygrid_practicas.setColAlign("left,left");
 	mygrid_practicas.setColTypes("ed,coro");
@@ -174,7 +174,7 @@ function initObjetivos(){
 	mygrid_objetivos.setSkin("dhx_skyblue");
 	mygrid_objetivos.setImagePath("css/images/");
 	mygrid_objetivos.setHeader("<center><b>"+lang["Objetivo Específico"]+"</b></center>,<center><b>"+lang["Proceso"]+"</b></center>");
-	mygrid_objetivos.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_objetivos.attachHeader("#text_filter,#select_filter");
 	mygrid_objetivos.setInitWidthsP("60,*");
 	mygrid_objetivos.setColAlign("left,left");
 	mygrid_objetivos.setColTypes("ed,coro");
@@ -240,7 +240,7 @@ function initProductos(){
 	mygrid_productos.setSkin("dhx_skyblue");
 	mygrid_productos.setImagePath("css/images/");
 	mygrid_productos.setHeader("<center><b>"+lang["Producto de trabajo"]+"</b></center>,<center><b>"+lang["Práctica Específica"]+"</b></center>");
-	mygrid_productos.attachHeader("#text_filter,#select_filter_strict");
+	mygrid_productos.attachHeader("#text_filter,#select_filter");
 	mygrid_productos.setInitWidthsP("60,*");
 	mygrid_productos.setColAlign("left,left");
 	mygrid_productos.setColTypes("ed,coro");

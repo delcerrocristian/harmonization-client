@@ -5,6 +5,11 @@ function chooseFile(type) {
 }
 
 function enviar(type){
+	$.loader({
+		className:"blue-with-image-2",
+		content:''
+	});
+	
 	var archivos = document.getElementById("file_"+type);//Damos el valor del input tipo file
 	var archivo = archivos.files; //Obtenemos el valor del input (los arcchivos) en modo de arreglo
 
@@ -30,6 +35,7 @@ function enviar(type){
 		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
 		cache:false //Para que el formulario no guarde cache
 	}).done(function(id){
+		$.loader('close');
 		openTable(id,type);
 		addModelToSelect(id,name,type);
 		

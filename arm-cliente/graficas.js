@@ -1,6 +1,6 @@
 var toolbar_top;
 var opt_grafica;
-var opt_estandar;
+var opt_estandar = 0;
 
 function inicializarToolbar(nombre){
 	var toolbar=new dhtmlXToolbarObject(nombre);
@@ -10,12 +10,11 @@ function inicializarToolbar(nombre){
 	var url_doc_dis = 'css/images/doc_dis.png';
 	
 	toolbar.addButtonSelect('graficas',0, 'Gráficas', new Array(), url_chart);
-	toolbar.addListOption('graficas','graf_1',1,'button','Barras Procesos ISO',url_chart);
-	toolbar.addListOption('graficas','graf_2',2,'button','Barras Procesos CMMI',url_chart);
+	toolbar.addListOption('graficas','graf_3',1,'button','Sectores',url_chart);
+	toolbar.addListOption('graficas','graf_1',2,'button','Barras Procesos ISO',url_chart);
+	toolbar.addListOption('graficas','graf_2',3,'button','Barras Procesos CMMI',url_chart);
 	
 	toolbar.addButtonSelect('estandar',1, 'Estándar', new Array(), url_doc, url_doc_dis);
-	toolbar.addListOption('estandar','est_1',1,'button','ISO 1',url_doc);
-	toolbar.addListOption('estandar','est_2',2,'button','CMMI 1',url_doc);
 	
 	toolbar.disableItem('estandar');
 	
@@ -24,22 +23,66 @@ function inicializarToolbar(nombre){
 	toolbar.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
 		case "load":
+			if(opt_estandar!=0){
+				var opt_estandar_array = opt_estandar.split("-");
+				
+				getStatsByStandard(opt_estandar_array[0],opt_estandar_array[1],function (data) {
+					switch (opt_estandar_array[0]) {
+						case 'iso':
+							var dataToDrawStats = [
+								       	       		{
+								       	       			name : 'Procesos', 
+								       	                   y: data.process
+								       	       		},
+								       	       		{
+								       	       			name: 'Actividades', 
+								       	                   y: data.activity
+								       	       		},
+								       	       		{
+								       	       			name: 'Tareas', 
+								       	                   y: data.task
+								       	       		}];
+							break;
+						case 'cmmi':
+							var dataToDrawStats = [
+								       	       		{
+								       	       			name : 'Procesos', 
+								       	                   y: data.process
+								       	       		},
+								       	       		{
+								       	       			name: 'Objetivos Específicos', 
+								       	                   y: data.specificGoal
+								       	       		},
+								       	       		{
+								       	       			name: 'Prácticas Específicas', 
+								       	                   y: data.specificPractice
+								       	       		},
+								       	       		{
+								       	       			name: 'Productos de Trabajo', 
+								       	                   y: data.workProduct
+								       	       		}];
+							break;
+					}
+						       			
+		       		graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
+				});
+			}
 			
-			var dataToDrawStats = [
-	       		{
-	       			name : 'Process', 
-	                   y: 10
-	       		},
-	       		{
-	       			name: 'Activity', 
-	                   y: 26
-	       		},
-	       		{
-	       			name: 'Task', 
-	                   y: 102
-	       		}];
-			
-			graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
+//			var dataToDrawStats = [
+//	       		{
+//	       			name : 'Process', 
+//	                   y: 10
+//	       		},
+//	       		{
+//	       			name: 'Activity', 
+//	                   y: 26
+//	       		},
+//	       		{
+//	       			name: 'Task', 
+//	                   y: 102
+//	       		}];
+//			
+//			graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
 //			graphGeneral();
 			break;
 		case "graficas":
@@ -52,6 +95,27 @@ function inicializarToolbar(nombre){
 				opcion = "graficas";
 				toolbar.enableItem('estandar');
 				opt_grafica = id_opt;
+				opt_estandar = 0;
+				
+				toolbar.removeItem("estandar");
+				toolbar.removeItem("load");
+				
+				toolbar.addButtonSelect('estandar',1, 'Estándar', new Array(), url_doc, url_doc_dis);
+				
+				toolbar.disableItem('estandar');
+				
+				toolbar.addButton('load', 2, 'Cargar', 'css/images/load.png');
+				
+				if(id_opt == "graf_3"){
+					toolbar.enableItem('estandar');
+					
+					fillSelect(function(models) {
+						for (var i in models){
+							toolbar.addListOption('estandar',models[i].type+"-"+models[i].id,i,'button',models[i].name+" ("+models[i].type.toUpperCase()+")",url_doc);
+						}
+					});
+				}
+				else toolbar.disableItem('estandar');
 				
 			}else{
 				opcion = "estandar";
@@ -146,16 +210,6 @@ function graphGeneral(){
 }
 
 $(document).ready(function() {
-	var url_array = $(location).attr('href').split('=');
-	
-	if(url_array.length == 2){
-		if(url_array[1] == 'en'){
-			$(".body").append("<script type='text/javascript' src='lang/en.js'></script>");
-		}else{
-			$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-		}
-	}else{
-		$(".body").append("<script type='text/javascript' src='lang/es.js'></script>");
-	}
+	language();
 	toolbar_top = inicializarToolbar('toolbar');
 });

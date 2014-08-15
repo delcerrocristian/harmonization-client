@@ -141,17 +141,10 @@ function initActividades(){
 	toolbar_actividades.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
 			case "add":
-				var id_process = mygrid_procesos.getSelectedRowId();
-				if (id_process != -1 && id_process != null){
-					var object = {process:id_process,name:"New activity"};
-					addElement('iso','activity',object,refreshTables,function (id) {
-						mygrid_actividades.selectRowById(id,false,true,false);
-					});
-				}
-				else{
-					alert(lang["Debe seleccionar un proceso de la tabla"]);
-				}
-				
+				var object = {process:all_process[0].id,name:"New activity"};
+				addElement('iso','activity',object,refreshTables,function (id) {
+					mygrid_actividades.selectRowById(id,false,true,false);
+				});
 				break;
 			case "del":
 				var id = mygrid_actividades.getSelectedRowId();
@@ -213,20 +206,10 @@ function initTareas(){
 	toolbar_tareas.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
 			case "add":
-				var id_process = mygrid_procesos.getSelectedRowId();
-				if (id_process != -1 && id_process != null){
-					
-					var id_activity = mygrid_actividades.getSelectedRowId();
-					if (id_activity == -1 || id_activity == null) id_activity = null;
-					
-					var object = {process:id_process,content:"New task",activity:id_activity};
-					addElement('iso','task',object,refreshTables,function (id) {
-						mygrid_tareas.selectRowById(id,false,true,false);
-					});
-				}
-				else{
-					alert(lang["Debe seleccionar un proceso de la tabla"]);
-				}
+				var object = {process:all_process[0].id,content:"New task"};
+				addElement('iso','task',object,refreshTables,function (id) {
+					mygrid_tareas.selectRowById(id,false,true,false);
+				});
 				break;
 			case "del":
 				var id = mygrid_tareas.getSelectedRowId();
@@ -273,7 +256,8 @@ function initTareas(){
 				}
 				
 								
-				updateElement('iso','task',updated[0],refreshTables)
+				updateElement('iso','task',updated[0],function(){});
+				return true;
 			}
 		}
 	});

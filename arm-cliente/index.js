@@ -21,16 +21,20 @@ function delPatron(index){
 }
 
 function resultados(){
-	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
+	var data = $('#model').val();
+	if(data != ""){
+		var data_array = data.split("-");
+		openTable(data_array[1],data_array[0]);
+	}
 }
 
-function manual(){
+function statistics(){
 	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
 }
 
 $(document).ready(function() {
 	
-	fillSelect();
+	fillSelect(addModelsToSelect);
 	
 	language();
 	

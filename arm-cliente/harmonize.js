@@ -30,6 +30,7 @@ function enviar(type){
 		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
 		cache:false //Para que el formulario no guarde cache
 	}).done(function(id){
+		openTable(id,type);
 		addModelToSelect(id,name,type);
 		
 	});
@@ -85,7 +86,7 @@ function language(){
 	}
 }
 
-function fillSelect(){
+function fillSelect(callback){
 	$.ajax({
 		url:urlApi+"/standard/all", //Url a donde la enviaremos
 		type:'GET', //Metodo que usaremos
@@ -93,13 +94,26 @@ function fillSelect(){
 		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
 		cache:false //Para que el formulario no guarde cache
 	}).done(function(models){
-		addModelsToSelect(models);
+		callback(models);
 	});
 }
 
 function getElements(type,type_element,id_standard,callback){
 	$.ajax({
 		url:urlApi+"/"+type+"/all"+type_element+"?standard="+id_standard, //Url a donde la enviaremos
+		type:'GET', //Metodo que usaremos
+		contentType:false, //Debe estar en false para que pase el objeto sin procesar
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		async:false,
+		cache:false //Para que el formulario no guarde cache
+	}).done(function(elements){
+		callback(elements);
+	});
+}
+
+function getStatsByStandard(type,id_standard,callback){
+	$.ajax({
+		url:urlApi+"/"+type+"/stats?id="+id_standard, //Url a donde la enviaremos
 		type:'GET', //Metodo que usaremos
 		contentType:false, //Debe estar en false para que pase el objeto sin procesar
 		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar

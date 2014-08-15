@@ -34,7 +34,7 @@ function initLayout(){
 
 function initProcesos(){
 	toolbar_procesos.setSkin("dhx_skyblue");
-	toolbar_procesos.addButton('add',0,'Detalles','css/images/add.png');
+	toolbar_procesos.addButton('add',0,'Detalles','css/images/details.png');
 	toolbar_procesos.addButton('del',1,'Eliminar','css/images/del.png');
 	
 	toolbar_procesos.attachEvent('onClick',function(id_opt){
@@ -86,7 +86,7 @@ function initProcesos(){
 }
 function initPracticas(){
 	toolbar_practicas.setSkin("dhx_skyblue");
-	toolbar_practicas.addButton('add',0,'Detalles','css/images/add.png');
+	toolbar_practicas.addButton('add',0,'Detalles','css/images/details.png');
 	toolbar_practicas.addButton('del',1,'Eliminar','css/images/del.png');
 	
 	toolbar_practicas.attachEvent('onClick',function(id_opt){
@@ -149,7 +149,7 @@ function initPracticas(){
 
 function initObjetivos(){
 	toolbar_objetivos.setSkin("dhx_skyblue");
-	toolbar_objetivos.addButton('add',0,'Detalles','css/images/add.png');
+	toolbar_objetivos.addButton('add',0,'Detalles','css/images/details.png');
 	toolbar_objetivos.addButton('del',1,'Eliminar','css/images/del.png');
 	
 	toolbar_objetivos.attachEvent('onClick',function(id_opt){

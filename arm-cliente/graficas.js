@@ -1,5 +1,5 @@
 var toolbar_top;
-var opt_grafica;
+var opt_grafica = 0;
 var opt_estandar = 0;
 
 function inicializarToolbar(nombre){
@@ -9,16 +9,16 @@ function inicializarToolbar(nombre){
 	var url_doc = 'css/images/doc.png';
 	var url_doc_dis = 'css/images/doc_dis.png';
 	
-	toolbar.addButtonSelect('graficas',0, 'Gráficas', new Array(), url_chart);
-	toolbar.addListOption('graficas','graf_3',1,'button','Sectores',url_chart);
-	toolbar.addListOption('graficas','graf_1',2,'button','Barras Procesos ISO',url_chart);
-	toolbar.addListOption('graficas','graf_2',3,'button','Barras Procesos CMMI',url_chart);
+	toolbar.addButtonSelect('graficas',0, lang['Gráficas'], new Array(), url_chart);
+	toolbar.addListOption('graficas','graf_3',1,'button',lang['Sectores'],url_chart);
+	toolbar.addListOption('graficas','graf_1',2,'button',lang['Procesos ISO'],url_chart);
+	toolbar.addListOption('graficas','graf_2',3,'button',lang['Procesos CMMI'],url_chart);
 	
-	toolbar.addButtonSelect('estandar',1, 'Estándar', new Array(), url_doc, url_doc_dis);
+	toolbar.addButtonSelect('estandar',1, lang['Estándar'], new Array(), url_doc, url_doc_dis);
 	
 	toolbar.disableItem('estandar');
 	
-	toolbar.addButton('load', 2, 'Cargar', 'css/images/load.png');
+	toolbar.addButton('load', 2, lang['Cargar'], 'css/images/load.png');
 	
 	toolbar.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
@@ -31,59 +31,103 @@ function inicializarToolbar(nombre){
 						case 'iso':
 							var dataToDrawStats = [
 								       	       		{
-								       	       			name : 'Procesos', 
+								       	       			name : lang['Procesos'], 
 								       	                   y: data.process
 								       	       		},
 								       	       		{
-								       	       			name: 'Actividades', 
+								       	       			name: lang['Actividades'], 
 								       	                   y: data.activity
 								       	       		},
 								       	       		{
-								       	       			name: 'Tareas', 
+								       	       			name: lang['Tareas'], 
 								       	                   y: data.task
 								       	       		}];
 							break;
 						case 'cmmi':
 							var dataToDrawStats = [
 								       	       		{
-								       	       			name : 'Procesos', 
+								       	       			name : lang['Procesos'], 
 								       	                   y: data.process
 								       	       		},
 								       	       		{
-								       	       			name: 'Objetivos Específicos', 
+								       	       			name: lang['Objetivos Específicos'], 
 								       	                   y: data.specificGoal
 								       	       		},
 								       	       		{
-								       	       			name: 'Prácticas Específicas', 
+								       	       			name: lang['Prácticas Específicas'], 
 								       	                   y: data.specificPractice
 								       	       		},
 								       	       		{
-								       	       			name: 'Productos de Trabajo', 
+								       	       			name: lang['Productos de Trabajo'], 
 								       	                   y: data.workProduct
 								       	       		}];
 							break;
 					}
 						       			
-		       		graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
+		       		graph(dataToDrawStats,'pie',lang['Cantidad Procesos Armonizados'],lang['Cantidad Total'],lang['Cantidad']);
 				});
+			}else if(opt_grafica == "graf_1"){
+				var categories = new Array();
+				var data_process = new Array();
+				var data_activity = new Array();
+				var data_task = new Array();
+				var data;
+				getAllStats('iso',function(models) {
+					models.forEach(function (element) {
+						categories.push(element.name);
+						data_process.push(element.process);
+						data_activity.push(element.activity);
+						data_task.push(element.task);
+					});
+					
+					data = [{
+			            name: lang['Procesos'],
+			            data: data_process
+			        }, {
+			            name: lang['Actividades'],
+			            data: data_activity
+			        }, {
+			            name: lang['Tareas'],
+			            data: data_task
+			        }];
+					 
+				});
+				graphGeneral(lang['Comparativa ISO'],categories,data);
 			}
-			
-//			var dataToDrawStats = [
-//	       		{
-//	       			name : 'Process', 
-//	                   y: 10
-//	       		},
-//	       		{
-//	       			name: 'Activity', 
-//	                   y: 26
-//	       		},
-//	       		{
-//	       			name: 'Task', 
-//	                   y: 102
-//	       		}];
-//			
-//			graph(dataToDrawStats,'pie','Cantidad Procesos Armonizados','Cantidad Total','Cantidad');
-//			graphGeneral();
+			else if(opt_grafica == "graf_2"){
+				var categories = new Array();
+				var data_process = new Array();
+				var data_specific_goal = new Array();
+				var data_specific_practice = new Array();
+				var data_work_product = new Array();
+				var data;
+				getAllStats('cmmi',function(models) {
+					models.forEach(function (element) {
+						categories.push(element.name);
+						data_process.push(element.process);
+						data_specific_goal.push(element.specificGoal);
+						data_specific_practice.push(element.specificPractice);
+						data_work_product.push(element.workProduct);
+					});
+					
+					data = [{
+			            name: lang['Procesos'],
+			            data: data_process
+			        }, {
+			            name: lang['Objetivos Específicos'],
+			            data: data_specific_goal
+			        }, {
+			            name: lang['Prácticas Específicas'],
+			            data: data_specific_practice
+			        },
+			        {
+			            name: lang['Productos de Trabajo'],
+			            data: data_work_product
+			        }];
+					 
+				});
+				graphGeneral(lang['Comparativa CMMI'],categories,data);
+			}
 			break;
 		case "graficas":
 		case "estandar":
@@ -100,11 +144,11 @@ function inicializarToolbar(nombre){
 				toolbar.removeItem("estandar");
 				toolbar.removeItem("load");
 				
-				toolbar.addButtonSelect('estandar',1, 'Estándar', new Array(), url_doc, url_doc_dis);
+				toolbar.addButtonSelect('estandar',1, lang['Estándar'], new Array(), url_doc, url_doc_dis);
 				
 				toolbar.disableItem('estandar');
 				
-				toolbar.addButton('load', 2, 'Cargar', 'css/images/load.png');
+				toolbar.addButton('load', 2, lang['Cargar'], 'css/images/load.png');
 				
 				if(id_opt == "graf_3"){
 					toolbar.enableItem('estandar');
@@ -165,20 +209,20 @@ function graph(data,type,title,yaxis,series) {
     });
 }
 
-function graphGeneral(){
+function graphGeneral(title,categories,data){
 	var height = $(window).height()-50;
 	$("#grafica").css('height',height+"px");
     $('#grafica').highcharts({
         title: {
-            text: 'Comparativa ISO',
+            text: title,
             x: -20 //center
         },
         xAxis: {
-            categories: ['ISO 1', 'ISO 2', 'ISO 3']
+        	categories: categories
         },
         yAxis: {
             title: {
-                text: 'Cantidad'
+                text: lang['Cantidad']
             },
             plotLines: [{
                 value: 0,
@@ -195,16 +239,7 @@ function graphGeneral(){
             verticalAlign: 'middle',
             borderWidth: 0
         },
-        series: [{
-            name: 'Procesos',
-            data: [10, 12, 15]
-        }, {
-            name: 'Actividades',
-            data: [33, 42, 37]
-        }, {
-            name: 'Tareas',
-            data: [112, 121, 102]
-        }],
+        series : data,
         lang : lang_graph
     });
 }

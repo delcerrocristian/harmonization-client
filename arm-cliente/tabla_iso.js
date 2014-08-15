@@ -91,7 +91,7 @@ function initProcesos(){
 			case "del":
 				var id = mygrid_procesos.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm(lang['¿Confirma que desea eliminar el proceso seleccionado?'])){
+					if(confirm(lang['¿Confirma que desea eliminar completamente el proceso seleccionado?'])){
 						deleteElement('iso','process',id,refreshTables);
 					}
 				}
@@ -104,7 +104,7 @@ function initProcesos(){
 	
 	mygrid_procesos.setSkin("dhx_skyblue");
 	mygrid_procesos.setImagePath("css/images/");
-	mygrid_procesos.setHeader("<center><b>Proceso</b></center>");
+	mygrid_procesos.setHeader("<center><b>"+lang["Proceso"]+"</b></center>");
 	mygrid_procesos.attachHeader("#text_filter");
 	mygrid_procesos.setInitWidthsP("*");
 	mygrid_procesos.setColAlign("left");
@@ -135,8 +135,8 @@ function initProcesos(){
 
 function initActividades(){
 	toolbar_actividades.setSkin("dhx_skyblue");
-	toolbar_actividades.addButton('add',0,'Añadir','css/images/add.png');
-	toolbar_actividades.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_actividades.addButton('add',0,lang['Añadir'],'css/images/add.png');
+	toolbar_actividades.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_actividades.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
@@ -149,12 +149,12 @@ function initActividades(){
 			case "del":
 				var id = mygrid_actividades.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar la actividad seleccionada?')){
+					if(confirm(lang['¿Confirma que desea eliminar la actividad seleccionada?'])){
 						deleteElement('iso','activity',id,refreshTables);
 					}
 				}
 				else{
-					alert("Debe seleccionar una actividad de la tabla");
+					alert(lang["Debe seleccionar una actividad de la tabla"]);
 				}
 				break;
 		}
@@ -162,7 +162,7 @@ function initActividades(){
 	
 	mygrid_actividades.setSkin("dhx_skyblue");
 	mygrid_actividades.setImagePath("css/images/");
-	mygrid_actividades.setHeader("<center><b>Actividad</b></center>"+","+"<center><b>Proceso</b></center>");
+	mygrid_actividades.setHeader("<center><b>"+lang["Actividad"]+"</b></center>,<center><b>"+lang["Proceso"]+"</b></center>");
 	mygrid_actividades.attachHeader("#text_filter,#select_filter_strict");
 	mygrid_actividades.setInitWidthsP("65,*");
 	mygrid_actividades.setColAlign("left,left");
@@ -200,8 +200,8 @@ function initActividades(){
 
 function initTareas(){
 	toolbar_tareas.setSkin("dhx_skyblue");
-	toolbar_tareas.addButton('add',0,'Añadir','css/images/add.png');
-	toolbar_tareas.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_tareas.addButton('add',0,lang['Añadir'],'css/images/add.png');
+	toolbar_tareas.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_tareas.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
@@ -214,12 +214,12 @@ function initTareas(){
 			case "del":
 				var id = mygrid_tareas.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar la tarea seleccionada?')){
+					if(confirm(lang['¿Confirma que desea eliminar la tarea seleccionada?'])){
 						deleteElement('iso','task',id,refreshTables);
 					}
 				}
 				else{
-					alert("Debe seleccionar una tarea de la tabla");
+					alert(lang["Debe seleccionar una tarea de la tabla"]);
 				}
 				break;
 		}
@@ -227,7 +227,7 @@ function initTareas(){
 	
 	mygrid_tareas.setSkin("dhx_skyblue");
 	mygrid_tareas.setImagePath("css/images/");
-	mygrid_tareas.setHeader("<center><b>Tarea</b></center>"+","+"<center><b>Proceso</b></center>"+","+"<center><b>Actividad</b></center>");
+	mygrid_tareas.setHeader("<center><b>"+lang["Tarea"]+"</b></center>,<center><b>"+lang["Proceso"]+"</b></center>,<center><b>"+lang["Actividad"]+"</b></center>");
 	mygrid_tareas.attachHeader("#text_filter,#select_filter_strict,#select_filter_strict");
 	mygrid_tareas.setInitWidthsP("55,20,*");
 	mygrid_tareas.setColAlign("left,left,left");

@@ -124,6 +124,19 @@ function getStatsByStandard(type,id_standard,callback){
 	});
 }
 
+function getAllStats(type,callback){
+	$.ajax({
+		url:urlApi+"/"+type+"/allstats", //Url a donde la enviaremos
+		type:'GET', //Metodo que usaremos
+		contentType:false, //Debe estar en false para que pase el objeto sin procesar
+		processData:false, //Debe estar en false para que JQuery no procese los datos a enviar
+		async:false,
+		cache:false //Para que el formulario no guarde cache
+	}).done(function(elements){
+		callback(elements);
+	});
+}
+
 function deleteElement(type,type_element,id,callback){
 	$.ajax({
 		url:urlApi+"/"+type+"/"+type_element+"?id="+id, //Url a donde la enviaremos

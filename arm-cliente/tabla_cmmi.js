@@ -34,23 +34,23 @@ function initLayout(){
 
 function initProcesos(){
 	toolbar_procesos.setSkin("dhx_skyblue");
-	toolbar_procesos.addButton('add',0,'Detalles','css/images/details.png');
-	toolbar_procesos.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_procesos.addButton('add',0,lang['Detalles'],'css/images/details.png');
+	toolbar_procesos.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_procesos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
 			case "add":
-				window.location = "tabla_cmmi_procesos.html?id="+id_standard;
+				window.location = "tabla_cmmi_procesos.html"+url_lang+"&id="+id_standard;
 				break;
 			case "del":
 				var id = mygrid_procesos.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar completamente el proceso seleccionado?')){
+					if(confirm(lang['¿Confirma que desea eliminar completamente el proceso seleccionado?'])){
 						deleteElement('cmmi','process',id,refreshTables);
 					}
 				}
 				else{
-					alert("Debe seleccionar un proceso de la tabla");
+					alert(lang["Debe seleccionar un proceso de la tabla"]);
 				}
 				break;
 		}
@@ -58,7 +58,7 @@ function initProcesos(){
 	
 	mygrid_procesos.setSkin("dhx_skyblue");
 	mygrid_procesos.setImagePath("css/images/");
-	mygrid_procesos.setHeader("<center><b>Proceso</b></center>");
+	mygrid_procesos.setHeader("<center><b>"+lang['Proceso']+"</b></center>");
 	mygrid_procesos.attachHeader("#text_filter");
 	mygrid_procesos.setInitWidthsP("*");
 	mygrid_procesos.setColAlign("left");
@@ -86,23 +86,23 @@ function initProcesos(){
 }
 function initPracticas(){
 	toolbar_practicas.setSkin("dhx_skyblue");
-	toolbar_practicas.addButton('add',0,'Detalles','css/images/details.png');
-	toolbar_practicas.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_practicas.addButton('add',0,lang['Detalles'],'css/images/details.png');
+	toolbar_practicas.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_practicas.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
 			case "add":
-				window.location = "tabla_cmmi_practicas.html?id="+id_standard;
+				window.location = "tabla_cmmi_practicas.html"+url_lang+"&id="+id_standard;
 				break;
 			case "del":
 				var id = mygrid_practicas.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar la actividad seleccionada?')){
+					if(confirm(lang["¿Confirma que desea eliminar la práctica específica seleccionada?"])){
 						deleteElement('cmmi','specificpractice',id,refreshTables);
 					}
 				}
 				else{
-					alert("Debe seleccionar una actividad de la tabla");
+					alert(lang["Debe seleccionar una práctica específica de la tabla"]);
 				}
 				break;
 		}
@@ -110,7 +110,7 @@ function initPracticas(){
 	
 	mygrid_practicas.setSkin("dhx_skyblue");
 	mygrid_practicas.setImagePath("css/images/");
-	mygrid_practicas.setHeader("<center><b>Práctica Específica</b></center>"+","+"<center><b>Objetivo Específico</b></center>");
+	mygrid_practicas.setHeader("<center><b>"+lang["Práctica Específica"]+"</b></center>,<center><b>"+lang["Objetivo Específico"]+"</b></center>");
 	mygrid_practicas.attachHeader("#text_filter,#select_filter_strict");
 	mygrid_practicas.setInitWidthsP("60,*");
 	mygrid_practicas.setColAlign("left,left");
@@ -149,23 +149,23 @@ function initPracticas(){
 
 function initObjetivos(){
 	toolbar_objetivos.setSkin("dhx_skyblue");
-	toolbar_objetivos.addButton('add',0,'Detalles','css/images/details.png');
-	toolbar_objetivos.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_objetivos.addButton('add',0,lang['Detalles'],'css/images/details.png');
+	toolbar_objetivos.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_objetivos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
 			case "add":
-				window.location = "tabla_cmmi_objetivos.html?id="+id_standard;
+				window.location = "tabla_cmmi_objetivos.html"+url_lang+"&id="+id_standard;
 				break;
 			case "del":
 				var id = mygrid_objetivos.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar el objetivo específico seleccionado?')){
+					if(confirm(lang['¿Confirma que desea eliminar el objetivo específico seleccionado?'])){
 						deleteElement('cmmi','specificgoal',id,refreshTables);
 					}
 				}
 				else{
-					alert("Debe seleccionar un objetivo específico de la tabla");
+					alert(lang["Debe seleccionar un objetivo específico de la tabla"]);
 				}
 				break;
 		}
@@ -173,7 +173,7 @@ function initObjetivos(){
 	
 	mygrid_objetivos.setSkin("dhx_skyblue");
 	mygrid_objetivos.setImagePath("css/images/");
-	mygrid_objetivos.setHeader("<center><b>Objetivo Específico</b></center>"+","+"<center><b>Proceso</b></center>");
+	mygrid_objetivos.setHeader("<center><b>"+lang["Objetivo Específico"]+"</b></center>,<center><b>"+lang["Proceso"]+"</b></center>");
 	mygrid_objetivos.attachHeader("#text_filter,#select_filter_strict");
 	mygrid_objetivos.setInitWidthsP("60,*");
 	mygrid_objetivos.setColAlign("left,left");
@@ -212,8 +212,8 @@ function initObjetivos(){
 
 function initProductos(){
 	toolbar_productos.setSkin("dhx_skyblue");
-	toolbar_productos.addButton('add',0,'Añadir','css/images/add.png');
-	toolbar_productos.addButton('del',1,'Eliminar','css/images/del.png');
+	toolbar_productos.addButton('add',0,lang['Añadir'],'css/images/add.png');
+	toolbar_productos.addButton('del',1,lang['Eliminar'],'css/images/del.png');
 	
 	toolbar_productos.attachEvent('onClick',function(id_opt){
 		switch(id_opt){
@@ -226,12 +226,12 @@ function initProductos(){
 			case "del":
 				var id = mygrid_productos.getSelectedRowId();
 				if (id != -1 && id != null){
-					if(confirm('¿Confirma que desea eliminar el producto de trabajo seleccionado?')){
+					if(confirm(lang['¿Confirma que desea eliminar el producto de trabajo seleccionado?'])){
 						deleteElement('cmmi','workproduct',id,refreshTables);
 					}
 				}
 				else{
-					alert("Debe seleccionar un producto de trabajo de la tabla");
+					alert(lang["Debe seleccionar un producto de trabajo de la tabla"]);
 				}
 				break;
 		}
@@ -239,7 +239,7 @@ function initProductos(){
 	
 	mygrid_productos.setSkin("dhx_skyblue");
 	mygrid_productos.setImagePath("css/images/");
-	mygrid_productos.setHeader("<center><b>Producto de trabajo</b></center>"+","+"<center><b>Práctica Específica</b></center>");
+	mygrid_productos.setHeader("<center><b>"+lang["Producto de trabajo"]+"</b></center>,<center><b>"+lang["Práctica Específica"]+"</b></center>");
 	mygrid_productos.attachHeader("#text_filter,#select_filter_strict");
 	mygrid_productos.setInitWidthsP("60,*");
 	mygrid_productos.setColAlign("left,left");

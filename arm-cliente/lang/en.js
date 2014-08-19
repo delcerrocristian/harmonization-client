@@ -53,7 +53,9 @@ var lang = {
 		"Tareas" : "Tasks",
 		"Objetivos Específicos" : "Specific Goals",
 		"Prácticas Específicas" : "Specific Practices",
-		"Productos de Trabajo" : "Work Products"
+		"Productos de Trabajo" : "Work Products",
+		"Ha ocurrido un error al procesar." : "An error has occurred processing the file.",
+		"Debe introducir el nombre." : "You have to enter the name"
 };
 
 var lang_graph = {

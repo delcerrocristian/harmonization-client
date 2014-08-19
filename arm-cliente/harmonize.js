@@ -38,8 +38,13 @@ function enviar(type){
 		$.loader('close');
 		openTable(id,type);
 		addModelToSelect(id,name,type);
-		
-	});
+	}).fail(function(error) {
+		$.loader('close');
+		var msg = "";
+		if(error.status == 400) msg = lang["Debe introducir el nombre."];
+		else msg = lang["Ha ocurrido un error al procesar."];
+	    alert(msg);
+	  });
 	
 }
 

@@ -1,0 +1,112 @@
+<!DOCTYPE html> 
+<html lang="es">
+    <head>
+      <meta charset="utf-8"/>
+       <title>arm-client</title>
+		
+		<style>
+		P {
+			text-align: justify
+		}
+		
+		SPAN {
+			font-style: italic;
+		}
+		
+		IMG {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		</style>
+    </head>
+
+    <body>
+		<h1>MANUAL DE USUARIO</h1>
+		<p>A continuación se explican los pasos que hay que seguir para un correcto uso de la aplicación web.</p>
+		<h2>PANTALLA PRINCIPAL</h2>
+		<p>La pantalla principal de la herramienta se divide en tres bloques: Extraer Procesos ISO, Extraer Procesos CMMI y Estándares/Modelos extraídos.</p>
+		<img src="images/01_image.png"></img>
+		<p>La herramienta está completamente internacionalizada, pudiendo elegir entre los idiomas español e inglés. Para cambiar de idioma simplemente hay que pulsar en los iconos con sus correspondientes banderas que se encuentran en la parte superior derecha de la pantalla. Además, hay una pantalla de ayuda que se puede desplegar pulsando el icono que está en la parte superior izquierda.</p>
+		<img src="images/02_image.png"></img>
+		<h2>EXTRAER PROCESOS ISO</h2>
+		<p>Uno de los bloques en los que se divide la pantalla principal es <span>Extraer procesos ISO.</span></p>
+		<p>Para procesar un archivo ISO se debe introducir un nombre en la sección correspondiente y si se desea o no introducir patrones de búsqueda. Los patrones de búsqueda son opcionales, en caso de no introducir ninguno la aplicación web aplicará la búsqueda mediante los patrones “shall” y “should”.</p>
+		<p>Por último se debe seleccionar un archivo en PDF que contenga la Norma ISO correspondiente. Esto se hace pulsando en <span>Seleccionar archivo</span></p>
+		<img src="images/03_image.png"></img>
+		<p>Tras lo explicado anteriormente se debe pulsar la tecla <span>Procesar</span> y esperar unos segundos a que se complete la operación.</p>
+		<p>Una vez completada la operación de extracción, la aplicación presenta una ventana con tres tablas en la que se muestra la información extraída del archivo en PDF con la norma ISO correspondiente. La ventana presenta la siguiente información en tres tablas diferentes: Procesos, Actividades y Tareas.</p>
+		<img src="images/04_image.png"></img>
+		<p>Estas tablas presentan múltiples opciones: Añadir, Editar, Eliminar y Filtrar por campo. Cada una de ellas se explicará a continuación.</p>
+		<h3>Añadir</h3>
+		<p>Para añadir un proceso, actividad o tarea hay que pulsar el botón <span>Añadir</span> en la correspondiente tabla.</p>
+		<p>Al pulsar <span>Añadir</span> en un proceso se generará un nuevo proceso con el nombre <span>New Process</span>. Para poner el nombre de proceso deseado simplemente hay que hacer doble click sobre el nombre, cambiarlo y pulsar <span>Enter</span>.</p>
+		<img src="images/05_image.png"></img>
+		<p>En el caso de la actividad se generará una nueva actividad con nombre <span>New Activity</span> y con un proceso al que pertenece por defecto, correspondiente al primer proceso de la tabla Procesos.</p>
+		<p>En la tabla tarea se generará una nueva tarea con nombre <span>New Task</span> y en el campo proceso se asigna un proceso por defecto correspondiente al primer proceso que aparece en la tabla <span>Procesos</span>. No se le añadirá ninguna actividad por defecto.</p>
+		<p>Para finalizar la creación de un proceso, actividad o tarea, el usuario puede modificar el nombre pulsando doble click sobre él, introduciendo uno nuevo y pulsando <span>Enter</span>. En el caso de actividades y tareas también se puede modificar el proceso al que pertenecen, para ello se debe hacer un click sobre el proceso y seleccionar el deseado, en el caso de tareas se puede realizar el mismo procedimiento para editar la actividad a la que pertenece.</p>
+		<p>En esta imagen se observa cómo se finaliza la creación de una actividad.</p>
+		<img src="images/06_image.png"></img>
+		<h3>Editar</h3>
+		<p>Para editar el nombre de un proceso, actividad o tarea hay que hacer doble click sobre el nombre que se desea editar, después introducir el nuevo nombre y por último, pulsar <span>Enter</span>.</p>
+		<p>Con respecto a la edición del proceso al que pertenece una actividad o una tarea, hay que hacer un click sobre el proceso y seleccionar el deseado, y para editar la actividad a la que pertenece una tarea es el mismo procedimiento que el anteriormente explicado.</p>
+		<p>En la siguiente imagen se muestra cómo se edita el proceso al que pertenece una tarea.</p>
+		<img src="images/07_image.png"></img>
+		<h3>Eliminar</h3>
+		<p>Para eliminar un proceso, una actividad o una tarea se debe seleccionar cualquiera de ellos y pulsar el botón <span>Eliminar</span>. Al hacerlo, se despliega una ventana de confirmación, hay que pulsar <span>Aceptar<span> para confirmar la eliminación o <span>Cancelar</span> si no es así. En el caso de borrar un proceso, también se eliminarán las actividades y tareas pertenecientes a ésta.</p>
+		<p>En la siguiente imagen se muestra el borrado de una tarea determinada.</p>
+		<img src="images/08_image.png"></img>
+		<h3>Filtrar por campos</h3>
+		<p>Las tres tablas permiten filtrar por campos. En el caso de la tabla Procesos se puede filtrar por nombre, en la tabla Actividades por nombre y procesos y en la tabla Tareas se puede filtrar por nombre, procesos y actividades. </p>
+		<p>En la siguiente imagen se puede observar la manera en la que se filtra una actividad por nombre y por proceso a la vez.</p>
+		<img src="images/09_image.png"></img>
+		<h2>EXTRAER PROCESOS CMMI</h2>
+		<p>El segundo de los bloques en los que se divide la pantalla principal es <span>Extraer procesos CMMI</span></p>
+		<p>El procedimiento para procesar un modelo CMMI es más sencillo que el correspondiente a una norma ISO. Para ello, solamente hay que introducir un nuevo nombre, seleccionar un archivo PDF que contenga el modelo y pulsar en <span>Procesar</span> hasta que la operación de extracción de procesos armonizados haya finalizado.</p>
+		<p>Al igual que con el procesado de norma ISO, al acabar la operación de extracción se presenta una ventana con la información extraída en tres tablas diferentes: Procesos, Objetivos Específicos, Prácticas Específicas y Productos de trabajo.</p>
+		<img src="images/10_image.png"></img>
+		<p>Estas tablas presentan múltiples opciones: Eliminar, Filtrar por campo y Ver detalles en el caso de Procesos, Objetivos Específicos y Prácticas Específicas. Y las opciones Añadir, editar, eliminar y filtrar por campo en el caso de Productos de trabajo.</p>
+		<p>La ventana de detalles se despliega pulsando el botón Detalles en el caso de las tablas Procesos, Objetivos Específico y Prácticas Específicas. Esta opción despliega una nueva ventana en la que aparece detallada la información y en la cual además se puede Añadir, Editar, Eliminar y Filtrar por campos. Para volver a la información de Procesos CMMI hay que pulsar el botón <span>Volver</span>.</p>
+		<p>En la siguiente imagen se muestra la ventana <span>Detalles de procesos</span>.</p>
+		<img src="images/11_image.png"></img>
+		<h3>Añadir</h3>
+		<p>Como se explicó anteriormente, dicha opción aparece en las ventanas detalle de Procesos, Objetivos Específicos, Prácticas Específicos, además de en la ventana Productos de trabajo.</p>
+		<p>Para añadir un proceso se debe pulsar el botón <span>Añadir</span> en la tabla <span>Detalles de proceso</span>, lo cual genera un nuevo proceso con el nombre <span>New Process</span>. Para añadir un objetivo específico se debe pulsar el botón <span>Añadir</span> en la tabla <span>Detalles de objetivo específico</span>. Al pulsar dicho botón se genera un nuevo objetivo específico con el nombre <span>New Specific Goal</span> y con un proceso por defecto correspondiente al primer proceso que aparece en la tabla <span>Procesos</span>.</p>
+		<img src="images/12_image.png"></img>
+		<p>Para añadir una práctica específica se debe pulsar el botón <span>Añadir</span> en la tabla detalles de práctica específica. Tras pulsar el botón se genera una nueva práctica específica con el nombre <span>New Specific Practice</span> y con un objetivo específico por defecto correspondiente al primer objetivo específico que aparece en la Tabla <span>Objetivos Específicos</span>.</p>
+		<p>Por otro lado, para añadir un nuevo producto de trabajo se debe pulsar el botón <span>Añadir</span> en la tabla de Productos de trabajo, esto genera un nuevo producto de trabajo con el nombre <span>New Work Product</span> y con una práctica específica que corresponde a la primera práctica específica que hay en la Tabla <span>Práctica Específica</span>.</p>
+		<p>Para finalizar la creación de Procesos, Objetivos específicos, Prácticas específicas o Productos de trabajo, el usuario de la aplicación puede modificar el nombre pulsando doble click sobre él, introduciendo uno nuevo y pulsando <span>Enter</span>. En el caso de Objetivos Específicos también se puede modificar el proceso al que pertenecen, para ello se debe hacer un click sobre el proceso y seleccionar el deseado. En el caso de Prácticas Específicas se puede realizar el mismo procedimiento para editar el objetivo específico al que pertenece, y para Productos de trabajo se puede editar la práctica específica al que pertenece del mismo modo.</p>
+		<p>En la siguiente imagen se observa cómo se finaliza la creación de un Objetivo Específico.</p>
+		<img src="images/13_image.png"></img>
+		<h3>Editar</h3>
+		<p>Para editar el nombre de un proceso, objetivo específico o práctica específica se puede hacer o bien desde la ventana <span>Detalles</span> de cada uno de estos elementos o desde la ventana de <span>Información de procesos extraídos CMMI</span>. Para editarlo hay que hacer doble click sobre el nombre que se desea editar, introducir el nuevo nombre y pulsar <span>Enter</span>.</p>
+		<p>Para editar el proceso al que pertenece un objetivo específico hay que hacer un click sobre el proceso y seleccionar el deseado. Se debe hacer el mismo procedimiento para editar el objetivo específico al que pertenece una práctica específica y para editar la práctica específica al que pertenece un producto de trabajo. En el caso de objetivo específico y práctica específica esta edición se puede hacer desde su ventana <span>Detalles</span>.</p>
+		<p>En la siguiente imagen se muestra cómo se edita la práctica específica al que pertenece un producto de trabajo.</p>
+		<img src="images/14_image.png"></img>
+		<h3>Eliminar</h3>
+		<p>Para eliminar un proceso, objetivo específico, práctica específica o un producto de trabajo se debe seleccionar cualquiera de ellos y pulsar el botón <span>Eliminar</span> en sus respectivas tablas de la ventana de <span>Información de proceso extraído CMMI</span>, lo cual despliega una ventana de confirmación, en la cual hay que pulsar <span>Aceptar</span> para confirmar la eliminación o <span>Cancelar</span> si no es así.  Además se pueden eliminar los procesos, objetivo específico o práctica específica desde sus respectivas ventanas de detalle siguiendo el mismo procedimiento.</p>
+		<p>En el caso de borrar un proceso, también se eliminarán los objetivos específicos, prácticas específicas y productos de trabajo pertenecientes a dicho proceso. Si se borra un objetivo específico, se borrarán las prácticas específicas y los productos de trabajo perteneciente a dicho objetivo específico. Y por último, si se borra una práctica específica, también lo harán los productos de trabajo pertenecientes a dicha práctica específica.</p>
+		<h3>Filtar por campos</h3>
+		<p>Las cuatro tablas permiten filtrar por campos. En la ventana de <span>Información de procesos extraídos CMMI</span> se pude filtrar por campos procesos, objetivos específicos, prácticas específicas y productos de trabajo. En el caso de la tabla <span>Procesos</span> se puede filtrar por nombre, en la tabla <span>Objetivos Específicos</span> por nombre y procesos. Por otra parte, en la tabla <span>Prácticas específicas<span> se puede filtrar por nombre y objetivos específicos, y en la tabla <span>Productos de Trabajo</span> se puede filtrar por nombre y por prácticas específicas.</p>
+		<p>En la ventana <span>Detalles de proceso</span> se pueden filtrar los procesos por todos los campos que lo definen, que son: Proceso (nombre), Área, Madurez y Propósito.</p>
+		<p>En la ventana <span>Detalles de objetivos específicos</span> se pueden filtrar por todos los campos que definen el objetivo específico: Objetivo específico (nombre), Descripción y Proceso. En la ventana <span>Detalles de prácticas específicas</span> se pueden filtrar por todos los campos que definen a la práctica específica: práctica específica (nombre), descripción y objetivo específico.</p>
+		<h2>ESTÁNDARES / MODELOS EXTRAÍDOS</h2>
+		<p>Estándares y modelos extraídos es el último de los bloques en los que se divide la pantalla principal. Este bloque presenta tres opciones: Recuperar información de ISO o CMMI, Estadísticas y borrar un estándar ya procesado.</p>
+		<p>Para recuperar la información de una ISO simplemente se tiene que seleccionar un procesamiento de una ISO, para que el usuario pueda saber que es el procesamiento de una ISO el nombre que tiene dicho procesamiento irá seguido de “ISO”. Por último se pulsa el botón <span>Resultados</span>.</p>
+		<img src="images/15_image.png"></img>
+		<p>Para recuperar un modelo CMMI ya procesado es igual que para una norma ISO pero los nombres van seguidos de “CMMI” y se pulsa en <span>Resultados</span>.</p>
+		<h3>Estadísticas</h3>
+		<p>Al pulsar el botón <span>Estadísticas</span> se abre una ventana </span>Estadísticas</span>. En esta nueva ventana se pueden mostrar tres tipos de gráficas: Sectores por estándar, comparativa de procesos ISO y comparativa de procesos CMMI. Para obtener una gráfica de sectores por estándar tenemos que seleccionar este tipo de gráfica en el desplegable <span>Gráficas</span> y a continuación el estándar del que se quiere obtener la gráfica. Una vez seleccionada la gráfica y el estándar hay que pulsar el botón <span>Cargar</span>.</p>
+		<p>En la siguiente imagen se muestra la gráfica de un modelo CMMI.</p>
+		<img src="images/16_image.png"></img>
+		<p>Para ver la comparativa de los procesos extraídos de las norma ISO simplemente hay que seleccionar la gráfica <span>Procesos ISO</span> y pulsar <span>Cargar</span>. Del mismo modo, para ver la comparativa de los procesos extraídos de las modelos CMMI simplemente hay que seleccionar la gráfica <span>Procesos CMMI<span> y pulsar <span>Cargar<span>.</p>
+		<p>En la siguiente imagen se muestra la gráfica de comparativas ISO.</p>
+		<img src="images/17_image.png"></img>
+		<h3>Borrar</h3>
+		<p>Para borrar completamente la extracción de procesos tanto de una norma ISO o un modelo CMMI hay que seleccionarlo y pulsar el botón <span>Borrar</span>.</p>
+
+		
+		
+    </body>
+</html>

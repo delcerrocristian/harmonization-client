@@ -29,7 +29,21 @@ function resultados(){
 }
 
 function statistics(){
-	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%,',iframe: true,scrolling : true});
+	$.colorbox({href:"graficas.html"+url_lang,width:'95%',height:'95%',iframe: true,scrolling : true});
+}
+
+function manual(){
+	$.colorbox({href:"manual_es.html",width:'75%',height:'95%',iframe: true,scrolling : true});
+}
+
+function deleteStandard(){
+	var data = $('#model').val();
+	if(data != ""){
+		var data_array = data.split("-");
+		deleteElement(data_array[0],"standard",data_array[1],function () {
+			$("#model option[value='"+data+"']").remove();
+		});
+	}
 }
 
 $(document).ready(function() {
